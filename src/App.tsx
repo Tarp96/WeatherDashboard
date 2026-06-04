@@ -8,10 +8,12 @@ function App() {
     queryFn: () => getWeatherData("London"),
   });
 
+  if (isPending) return <h2>Loading data...</h2>;
+
   return (
     <>
       <h1 className="text-3xl font-bold underline">Weather Dashboard</h1>
-      <p>{isPending ? <h2>Loading data....</h2> : JSON.stringify(data)}</p>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </>
   );
 }
