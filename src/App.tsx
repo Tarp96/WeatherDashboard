@@ -10,7 +10,7 @@ function App() {
 
   return (
     <>
-      <h1>Weather Dashboard</h1>
+      <h1 className="text-3xl font-bold underline">Weather Dashboard</h1>
       <p>{isPending ? <h2>Loading data....</h2> : JSON.stringify(data)}</p>
     </>
   );
