@@ -27,9 +27,7 @@ export const CityWeatherDisplay = () => {
       </div>
 
       <div className="mt-6">
-        <p className="text-6xl font-bold">
-          {Math.round(data.main.temp - 273.15)}°C
-        </p>
+        <p className="text-6xl font-bold">{Math.round(data.main.temp)}°C</p>
         <p className="mt-2 capitalize text-lg text-blue-100">
           {weather.description}
         </p>
