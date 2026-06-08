@@ -13,6 +13,7 @@ export const CityWeatherDisplay = () => {
 
   const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
+  const weatherDescription = currentConditions.weather[0];
   console.log(currentConditions);
 
   return (
@@ -38,7 +39,7 @@ export const CityWeatherDisplay = () => {
         </p>
 
         <p className="mt-2 capitalize text-lg text-blue-100">
-          {currentConditions.description}
+          {weatherDescription.description}
         </p>
       </div>
     </section>
