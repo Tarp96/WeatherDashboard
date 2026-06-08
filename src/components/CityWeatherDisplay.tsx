@@ -20,15 +20,14 @@ export const CityWeatherDisplay = () => {
     <section className="max-w-md mx-auto mt-10 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-700 p-6 text-white shadow-lg">
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-3xl font-bold">{}</h2>
-          <p className="text-blue-100">
-            {data?.city} {data?.country}
-          </p>
+          <h2 className="text-3xl font-bold">
+            {data.city}, {data.state} {data.country}
+          </h2>
         </div>
 
         <img
           src={`https://openweathermap.org/img/wn/${currentConditions.weather[0].icon}@2x.png`}
-          alt={"S"}
+          alt={weatherDescription.description}
           className="h-20 w-20"
         />
       </div>

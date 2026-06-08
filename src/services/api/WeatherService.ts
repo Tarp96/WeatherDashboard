@@ -32,6 +32,7 @@ export const getWeatherDataWithCoordinates = async (city: string) => {
   return {
     city: geoData[0].name,
     country: geoData[0].country,
+    state: geoData[0].state,
     weather: weatherData,
   };
 };

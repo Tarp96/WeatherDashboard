@@ -1,6 +1,7 @@
 export interface CityWeatherData {
     city: string; 
     country: string;
+    state: string;
     weather: WeatherApiResponse;
 }
 
