@@ -1,3 +1,9 @@
+export interface CityWeatherData {
+    city: string; 
+    country: string;
+    weather: WeatherApiResponse;
+}
+
 export interface WeatherDescription {
     id: number; 
     main: string; 
