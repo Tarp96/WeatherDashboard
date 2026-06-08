@@ -36,10 +36,22 @@ export const CityWeatherDisplay = () => {
         <p className="text-6xl font-bold">
           {Math.round(currentConditions.temp)}°C
         </p>
+        <p>Feels like {currentConditions.feels_like}</p>
 
         <p className="mt-2 capitalize text-lg text-blue-100">
           {weatherDescription.description}
         </p>
+      </div>
+
+      <div>
+        <div>
+          <p>Humidity</p>
+          <p>{currentConditions.humidity}</p>
+        </div>
+        <div>
+          <p>Wind Speed</p>
+          <p>{currentConditions.wind_speed}</p>
+        </div>
       </div>
     </section>
   );
