@@ -1,15 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../services/api/WeatherService";
+import { CityWeatherData } from "../types/Weather";
 
 export const CityWeatherDisplay = () => {
-  const { data, isPending } = useQuery({
+  const { data, isPending } = useQuery<CityWeatherData>({
     queryKey: ["cityData"],
     queryFn: () => getWeatherDataWithCoordinates("Milano"),
   });
 
   if (isPending) return <h2>Loading data...</h2>;
+  if (!data) return <h2>No data found</h2>;
 
-  const weatherApiResponse = data?.weather;
+  const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
   console.log(currentConditions);
 
