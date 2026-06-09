@@ -1,13 +1,8 @@
-import { CityWeatherDisplay } from "../components/CityWeatherDisplay";
-import { TodaysTemperature } from "../components/TodaysTemperature";
-
 export const HomePage = () => {
   return (
     <>
-      <div>
-        <CityWeatherDisplay />
-        <TodaysTemperature />
-      </div>
+      <h1 className="text-3xl font-bold underline">Weather Dashboard</h1>
+      <div></div>
     </>
   );
 };
