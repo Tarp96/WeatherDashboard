@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../services/api/WeatherService";
 import { CityWeatherData } from "../types/Weather";
 import { Droplets, Wind } from "lucide-react";
+import { WeatherInfoCard } from "./WeatherInfoCard";
 
 export const CityWeatherDisplay = () => {
   const { data, isPending } = useQuery<CityWeatherData>({
@@ -40,27 +41,17 @@ export const CityWeatherDisplay = () => {
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="flex items-center gap-4 rounded-xl bg-white/10 p-4">
-            <Droplets className="h-10 w-10 text-blue-200" />
+          <WeatherInfoCard
+            icon={Droplets}
+            label="Humidity"
+            value={currentConditions.humidity.toString()}
+          />
 
-            <div>
-              <p className="text-sm text-blue-100">Humidity</p>
-              <p className="mt-1 text-2xl font-semibold">
-                {currentConditions.humidity}%
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4 rounded-xl bg-white/10 p-4">
-            <Wind className="h-10 w-10 text-blue-200" />
-
-            <div>
-              <p className="text-sm text-blue-100">Wind Speed</p>
-              <p className="mt-1 text-2xl font-semibold">
-                {currentConditions.wind_speed} m/s
-              </p>
-            </div>
-          </div>
+          <WeatherInfoCard
+            icon={Wind}
+            label="Wind"
+            value={currentConditions.wind_speed.toString()}
+          />
         </div>
       </div>
 
