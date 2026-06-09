@@ -1,3 +1,5 @@
+import { WeatherOverview } from "../components/WeatherOverview";
+
 export const HomePage = () => {
   return (
     <>
@@ -6,7 +8,7 @@ export const HomePage = () => {
         <h2>Favorites</h2>
       </div>
       <div>
-        <h2>My Location</h2>
+        <WeatherOverview />
       </div>
     </>
   );
