@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../services/api/WeatherService";
 import { CityWeatherData } from "../types/Weather";
+import { Droplets, Wind } from "lucide-react";
 
 export const CityWeatherDisplay = () => {
   const { data, isPending } = useQuery<CityWeatherData>({
@@ -39,18 +40,26 @@ export const CityWeatherDisplay = () => {
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-4">
-          <div className="rounded-xl bg-white/10 p-4">
-            <p className="text-sm text-blue-100">Humidity</p>
-            <p className="mt-1 text-2xl font-semibold">
-              {currentConditions.humidity}%
-            </p>
+          <div className="flex items-center gap-4 rounded-xl bg-white/10 p-4">
+            <Droplets className="h-10 w-10 text-blue-200" />
+
+            <div>
+              <p className="text-sm text-blue-100">Humidity</p>
+              <p className="mt-1 text-2xl font-semibold">
+                {currentConditions.humidity}%
+              </p>
+            </div>
           </div>
 
-          <div className="rounded-xl bg-white/10 p-4">
-            <p className="text-sm text-blue-100">Wind Speed</p>
-            <p className="mt-1 text-2xl font-semibold">
-              {currentConditions.wind_speed} m/s
-            </p>
+          <div className="flex items-center gap-4 rounded-xl bg-white/10 p-4">
+            <Wind className="h-10 w-10 text-blue-200" />
+
+            <div>
+              <p className="text-sm text-blue-100">Wind Speed</p>
+              <p className="mt-1 text-2xl font-semibold">
+                {currentConditions.wind_speed} m/s
+              </p>
+            </div>
           </div>
         </div>
       </div>
