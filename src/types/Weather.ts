@@ -28,3 +28,49 @@ export interface WeatherApiResponse {
   timezone_offset: number;
   data: CurrentConditions[];
 }
+
+export interface FiveDayForecastResponse {
+  cod: string;
+  message: number;
+  cnt: number;
+  list: ForecastWeatherResponse[];
+}
+
+export interface ForecastWeatherResponse {
+  dt: number;
+  main: ForecastMain;
+  weather: WeatherDescription[];
+  clouds: ForecastClouds;
+  wind: ForecastWind;
+  visibility: number;
+  pop: number;
+  rain?: ForecastRain;
+  dt_txt: string;
+}
+
+export interface ForecastMain {
+  temp: number;
+  feels_like: number;
+  temp_min: number;
+  temp_max: number;
+  pressure: number;
+  sea_level: number;
+  grnd_level: number;
+  humidity: number;
+  temp_kf: number;
+}
+
+export interface ForecastClouds {
+  all: number;
+}
+
+export interface ForecastWind {
+  speed: number;
+  deg: number;
+  gust: number;
+}
+
+export interface ForecastRain {
+  "3h": number;
+}
+ 
