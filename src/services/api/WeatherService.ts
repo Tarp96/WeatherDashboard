@@ -46,13 +46,15 @@ export const getFiveDayForecastData = async (city: string) => {
   }
 
   const {lat, lon} = geoData[0]
-
   const response = await fetch(
-    `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`
   )
 
-  const forecastData = await response.json();
+    if (!response.ok) {
+    throw new Error("Failed to fetch weather data");
+  }
 
+  const forecastData = await response.json();
   return forecastData;
 };
 

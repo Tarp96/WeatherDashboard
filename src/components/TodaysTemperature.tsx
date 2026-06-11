@@ -11,11 +11,15 @@ export const TodaysTemperature = () => {
   if (isPending) return <h2>Data Loading</h2>;
 
   const forecastData = data?.list;
+  const firstForecast = forecastData?.[0];
+
   console.log(forecastData);
+  console.log(firstForecast);
 
   return (
     <>
       <h2>Today's Temperature</h2>
+      {}
     </>
   );
 };
