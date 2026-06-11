@@ -38,4 +38,21 @@ export const getWeatherDataWithCoordinates = async (city: string) => {
 };
 
 
+export const getFiveDayForecastData = async (city: string) => {
+  const geoData = await getLongLat(city)
+
+    if (!geoData.length) {
+    throw new Error("City not found");
+  }
+
+  const {lat, lon} = geoData[0]
+
+  const response = await fetch(
+    `api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`
+  )
+
+  const forecastData = await response.json();
+
+  return forecastData;
+};
 
