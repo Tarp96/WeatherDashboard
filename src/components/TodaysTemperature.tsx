@@ -29,7 +29,7 @@ export const TodaysTemperature = () => {
   }));
 
   return (
-    <section className="h-full min-h-[360px] rounded-3xl bg-white p-6 shadow-xl">
+    <section className="h-full min-h-[360px] rounded-3xl border border-slate-200 bg-white p-6 shadow-xl">
       <div className="mb-6">
         <p className="text-sm font-medium text-slate-500">
           Today&apos;s Temperature
