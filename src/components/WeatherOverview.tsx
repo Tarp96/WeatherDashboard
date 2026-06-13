@@ -3,7 +3,7 @@ import { TodaysTemperature } from "./TodaysTemperature";
 
 export const WeatherOverview = () => {
   return (
-    <div className="mx-auto mt-8 flex max-w-7xl flex-col gap-6 px-4 lg:flex-row">
+    <div className="mx-auto mt-8 grid max-w-7xl grid-cols-1 gap-6 px-4 lg:grid-cols-2">
       <div className="flex-1">
         <CityWeatherDisplay />
       </div>

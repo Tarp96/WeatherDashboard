@@ -19,7 +19,8 @@ export const CityWeatherDisplay = () => {
   console.log(currentConditions);
 
   return (
-    <section className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-800 p-6 text-white shadow-xl md:grid-cols-[2fr_1fr]">
+    <section className="grid h-full grid-cols-1 gap-6 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-800 p-6 text-white shadow-xl md:grid-cols-[2fr_1fr]">
+      {" "}
       <div className="rounded-2xl bg-white/10 p-6 backdrop-blur-sm">
         <div>
           <h2 className="text-3xl font-bold">
@@ -54,7 +55,6 @@ export const CityWeatherDisplay = () => {
           />
         </div>
       </div>
-
       <div className="flex flex-col items-center justify-center rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm">
         <img
           src={`https://openweathermap.org/img/wn/${currentConditions.weather[0].icon}@2x.png`}
