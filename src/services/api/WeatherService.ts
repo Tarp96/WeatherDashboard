@@ -47,7 +47,7 @@ export const getFiveDayForecastData = async (city: string) => {
 
   const {lat, lon} = geoData[0]
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`
   )
 
     if (!response.ok) {
