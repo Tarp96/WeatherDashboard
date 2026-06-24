@@ -16,7 +16,9 @@ export const CityWeatherDisplay = () => {
   const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
   const weatherDescription = currentConditions.weather[0];
-  console.log(currentConditions);
+
+  if (!isPending && data) {
+  }
 
   return (
     <section className="grid h-full grid-cols-1 gap-6 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-800 p-6 text-white shadow-xl md:grid-cols-[2fr_1fr]">

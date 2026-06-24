@@ -28,6 +28,14 @@ export const TodaysTemperature = () => {
     temp: Math.round(forecast.main.temp),
   }));
 
+  console.log(chartData);
+
+  const totalTemp = chartData?.reduce((sum, item) => sum + item.temp, 0) ?? 0;
+  const averageTemp =
+    chartData && chartData.length > 0 ? totalTemp / chartData.length : 0;
+
+  console.log(averageTemp);
+
   return (
     <section className="h-full min-h-[360px] rounded-3xl border border-slate-200 bg-white p-6 shadow-xl">
       <div className="mb-6">
@@ -35,6 +43,7 @@ export const TodaysTemperature = () => {
           Today&apos;s Temperature
         </p>
         <h2 className="text-2xl font-bold text-slate-900">24 Hour Forecast</h2>
+        <p>Average Temperature: {averageTemp}°C</p>
       </div>
 
       <div className="h-[280px]">
