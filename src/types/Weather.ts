@@ -13,12 +13,19 @@ export interface WeatherDescription {
 }
 
 export interface CurrentConditions {
-    temp: number;
-    feels_like: number; 
-    pressure: number; 
-    humidity: number;
-    wind_speed: number; 
-    weather: WeatherDescription[]
+  temp: number;
+  feels_like: number;
+  pressure: number;
+  humidity: number;
+  wind_speed: number;
+  wind_deg: number;
+  sunrise: number;
+  sunset: number;
+  visibility: number;
+  clouds: number;
+  uvi: number;
+  dew_point: number;
+  weather: WeatherDescription[];
 }
 
 export interface WeatherApiResponse {
