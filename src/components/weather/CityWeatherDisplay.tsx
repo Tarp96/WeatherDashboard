@@ -1,6 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
-import { getWeatherDataWithCoordinates } from "../services/api/WeatherService";
-import { CityWeatherData } from "../types/Weather";
+import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
+import { CityWeatherData } from "../../types/Weather";
 import { Droplets, Wind } from "lucide-react";
 import { WeatherInfoCard } from "./WeatherInfoCard";
 

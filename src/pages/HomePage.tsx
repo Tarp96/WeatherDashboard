@@ -1,4 +1,4 @@
-import { WeatherOverview } from "../components/WeatherOverview";
+import { WeatherOverview } from "../components/weather/WeatherOverview";
 
 export const HomePage = () => {
   return (
