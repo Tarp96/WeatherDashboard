@@ -1,20 +1,23 @@
 import { useQuery } from "@tanstack/react-query";
-import { FiveDayForecastResponse } from "../../types/Weather";
+import { WeatherApiResponse } from "../../types/Weather";
 import { getFiveDayForecastData } from "../../services/api/WeatherService";
 
 export const WeatherDetails = () => {
-  const { data, isPending } = useQuery<FiveDayForecastResponse>({
-    queryKey: ["fiveDayForecastData"],
+  const { data, isPending } = useQuery<WeatherApiResponse>({
+    queryKey: ["cityData"],
     queryFn: () => getFiveDayForecastData("Oslo"),
   });
 
   if (isPending) <h2>Details loading...</h2>;
 
-  const detailsData = data?.list[0];
+  const detailsData = data?.data[0];
 
   return (
     <>
-      <div></div>
+      <div>
+        <p>Sunrise</p>
+        {detailsData?.sunrise}
+      </div>
     </>
   );
 };
