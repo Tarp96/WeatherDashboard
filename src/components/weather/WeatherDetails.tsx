@@ -19,6 +19,7 @@ export const WeatherDetails = () => {
   return (
     <>
       <div className="rounded-2xl border border-gray-200 bg-white p-4">
+        <h2>Details</h2>
         <div className="grid grid-cols-2 gap-3">
           <WeatherInfoCard
             icon={Sunrise}
@@ -46,6 +47,7 @@ export const WeatherDetails = () => {
             icon={Wind}
             value={`${detailsData?.wind_speed ?? 0} m/s`}
             label="Wind Speed"
+            size="compact"
             variant="light"
           />
 
@@ -53,6 +55,7 @@ export const WeatherDetails = () => {
             icon={Gauge}
             value={`${detailsData?.pressure} hPa`}
             label="Pressure"
+            size="compact"
             variant="light"
           />
 
@@ -60,6 +63,7 @@ export const WeatherDetails = () => {
             icon={Thermometer}
             value={`${detailsData?.feels_like}°C`}
             label="Feels like"
+            size="compact"
             variant="light"
           />
 
@@ -67,6 +71,7 @@ export const WeatherDetails = () => {
             icon={Sun}
             value={detailsData?.uvi ?? 0}
             label="UV Index"
+            size="compact"
             variant="light"
           />
         </div>

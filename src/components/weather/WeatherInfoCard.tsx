@@ -16,7 +16,7 @@ export const WeatherInfoCard = ({
   label,
   value,
   size = "default",
-  variant = "dark", // default keeps old behavior
+  variant = "dark",
 }: WeatherInfoCardProps) => {
   const isCompact = size === "compact";
   const isLight = variant === "light";
