@@ -11,14 +11,11 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export const TodaysTemperature = () => {
-  const { data, isPending } = useQuery<FiveDayForecastResponse>({
-    queryKey: ["fiveDayForecastData"],
-    queryFn: () => getFiveDayForecastData("Oslo"),
-  });
+interface TodaysTemperatureProps {
+  data: FiveDayForecastResponse;
+}
 
-  if (isPending) return <h2>Data Loading</h2>;
-
+export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
   const forecastData = data?.list;
 
   const dailyTemperature = forecastData?.slice(0, 8);
