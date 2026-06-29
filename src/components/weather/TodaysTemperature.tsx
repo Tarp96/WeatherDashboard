@@ -1,5 +1,3 @@
-import { getFiveDayForecastData } from "../../services/api/WeatherService";
-import { useQuery } from "@tanstack/react-query";
 import { FiveDayForecastResponse } from "../../types/Weather";
 import {
   LineChart,
