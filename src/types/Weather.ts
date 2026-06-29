@@ -80,3 +80,4 @@ export interface ForecastWind {
 export interface ForecastRain {
   "3h": number;
 } 
+

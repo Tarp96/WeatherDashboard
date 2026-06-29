@@ -1,24 +1,15 @@
-import { useQuery } from "@tanstack/react-query";
-import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
 import { CityWeatherData } from "../../types/Weather";
 import { Droplets, Wind } from "lucide-react";
 import { WeatherInfoCard } from "./WeatherInfoCard";
 
-export const CityWeatherDisplay = () => {
-  const { data, isPending } = useQuery<CityWeatherData>({
-    queryKey: ["cityData"],
-    queryFn: () => getWeatherDataWithCoordinates("Milano"),
-  });
+interface CityWeatherDisplayProps {
+  data: CityWeatherData;
+}
 
-  if (isPending) return <h2>Loading data...</h2>;
-  if (!data) return <h2>No data found</h2>;
-
+export const CityWeatherDisplay = ({ data }: CityWeatherDisplayProps) => {
   const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
   const weatherDescription = currentConditions.weather[0];
-
-  if (!isPending && data) {
-  }
 
   return (
     <section className="grid h-full grid-cols-1 gap-6 rounded-3xl bg-gradient-to-br from-blue-500 to-blue-800 p-6 text-white shadow-xl md:grid-cols-[2fr_1fr]">

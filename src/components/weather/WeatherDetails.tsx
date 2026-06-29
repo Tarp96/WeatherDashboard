@@ -1,18 +1,13 @@
-import { useQuery } from "@tanstack/react-query";
 import { CityWeatherData } from "../../types/Weather";
-import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
 import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
 import { Gauge, Sun, Sunrise, Sunset, Thermometer, Wind } from "lucide-react";
 import { WeatherInfoCard } from "./WeatherInfoCard";
 
-export const WeatherDetails = () => {
-  const { data, isPending } = useQuery<CityWeatherData>({
-    queryKey: ["cityData"],
-    queryFn: () => getWeatherDataWithCoordinates("Oslo"),
-  });
+interface WeatherDetailsProps {
+  data: CityWeatherData;
+}
 
-  if (isPending) return <h2>Details loading...</h2>;
-
+export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
   const weatherData = data?.weather;
   const detailsData = weatherData?.data[0];
 
