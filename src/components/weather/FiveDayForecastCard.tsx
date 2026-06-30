@@ -11,44 +11,43 @@ export const FiveDayForecastCard = () => {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl bg-white/10 p-5 backdrop-blur-md border border-white/10">
-      <div className="text-center">
-        <p className="text-lg font-semibold text-white">{mockForecast.date}</p>
-
-        <p className="text-sm text-blue-200">
-          {mockForecast.weatherDescription}
-        </p>
-      </div>
-
-      <div className="h-px bg-white/10" />
-
-      <div className="grid grid-cols-2 gap-4">
-        <div className="flex items-center justify-center gap-2">
-          <ArrowUp className="h-5 w-5 text-red-300" />
-          <span className="text-xl font-semibold">
-            {mockForecast.highestTemp}°
-          </span>
+    <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p className="text-lg font-semibold text-slate-900">
+            {mockForecast.date}
+          </p>
+          <p className="text-sm text-slate-500">
+            {mockForecast.weatherDescription}
+          </p>
         </div>
 
-        <div className="flex items-center justify-center gap-2">
-          <ArrowDown className="h-5 w-5 text-blue-300" />
-          <span className="text-xl font-semibold">
-            {mockForecast.lowestTemp}°
-          </span>
+        <div className="flex items-center gap-5">
+          <div className="flex items-center gap-2">
+            <ArrowUp className="h-5 w-5 text-red-400" />
+            <span className="font-semibold text-slate-900">
+              {mockForecast.highestTemp}°
+            </span>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <ArrowDown className="h-5 w-5 text-blue-400" />
+            <span className="font-semibold text-slate-900">
+              {mockForecast.lowestTemp}°
+            </span>
+          </div>
         </div>
-      </div>
 
-      <div className="h-px bg-white/10" />
+        <div className="flex items-center gap-5 text-sm text-slate-600">
+          <div className="flex items-center gap-2">
+            <Droplet className="h-5 w-5 text-cyan-400" />
+            <span>{mockForecast.humidity}%</span>
+          </div>
 
-      <div className="grid grid-cols-2 gap-4">
-        <div className="flex items-center justify-center gap-2">
-          <Droplet className="h-5 w-5 text-cyan-300" />
-          <span>{mockForecast.humidity}%</span>
-        </div>
-
-        <div className="flex items-center justify-center gap-2">
-          <Wind className="h-5 w-5 text-slate-300" />
-          <span>{mockForecast.windSpeed} m/s</span>
+          <div className="flex items-center gap-2">
+            <Wind className="h-5 w-5 text-blue-400" />
+            <span>{mockForecast.windSpeed} m/s</span>
+          </div>
         </div>
       </div>
     </div>
