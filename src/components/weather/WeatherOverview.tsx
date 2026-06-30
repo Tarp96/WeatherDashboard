@@ -7,6 +7,7 @@ import {
   getFiveDayForecastData,
   getWeatherDataWithCoordinates,
 } from "../../services/api/WeatherService";
+import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 
 export const WeatherOverview = () => {
   const currentWeatherQuery = useQuery<CityWeatherData>({
@@ -26,10 +27,16 @@ export const WeatherOverview = () => {
   if (!currentWeatherQuery.data || !forecastQuery.data) return null;
 
   return (
-    <div className="mx-auto mt-8 grid max-w-screen-2xl grid-cols-1 gap-6 px-6 lg:grid-cols-[2fr_1fr]">
-      <CityWeatherDisplay data={currentWeatherQuery.data} />
-      <TodaysTemperature data={forecastQuery.data} />
-      <WeatherDetails data={currentWeatherQuery.data} />
+    <div className="mx-auto mt-8 max-w-screen-2xl px-6">
+      <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+        <CityWeatherDisplay data={currentWeatherQuery.data} />
+        <TodaysTemperature data={forecastQuery.data} />
+      </div>
+
+      <div className="mt-6 grid gap-6 lg:grid-cols-[3fr_2fr]">
+        <WeatherDetails data={currentWeatherQuery.data} />
+        <FiveDayForecastContainer />
+      </div>
     </div>
   );
 };
