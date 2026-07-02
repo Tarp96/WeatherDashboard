@@ -35,7 +35,7 @@ export const WeatherOverview = () => {
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[3fr_2fr]">
         <WeatherDetails data={currentWeatherQuery.data} />
-        <FiveDayForecastContainer />
+        <FiveDayForecastContainer data={forecastQuery.data} />
       </div>
     </div>
   );
