@@ -1,10 +1,19 @@
 import { FiveDayForecastResponse } from "../../types/Weather";
 import { FiveDayForecastCard } from "./FiveDayForecastCard";
 import { formatTime } from "../../utils/helpers/TimeStampConverter";
-import { DisplayForecastItems } from "../../types/Weather";
 
 interface FiveDayForecastContainerProps {
   data?: FiveDayForecastResponse;
+}
+
+export interface DisplayForecastItems {
+  date: number;
+  timezone: number;
+  weatherDescription: string;
+  lowestTemp: number;
+  highestTemp: number;
+  humidity: number;
+  windSpeed: number;
 }
 
 type WeatherSortedByDate = {
@@ -37,6 +46,8 @@ export const FiveDayForecastContainer = ({
     },
     {},
   );
+
+  console.log(weatherSortedByDate);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg">

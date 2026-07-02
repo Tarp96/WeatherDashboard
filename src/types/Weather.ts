@@ -87,13 +87,5 @@ export interface ForecastCity {
   timezone: number; 
 }
 
-export interface DisplayForecastItems {
-  date: number, 
-  timezone: number,
-  weatherDescription: string, 
-  lowestTemp: number, 
-  highestTemp: number, 
-  humidity: number, 
-  windSpeed: number 
-}
+
 
