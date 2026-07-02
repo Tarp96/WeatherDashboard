@@ -9,17 +9,17 @@ export const FiveDayForecastContainer = ({
   data,
 }: FiveDayForecastContainerProps) => {
   const foreCastItems = data?.list ?? [];
+  const timezoneOffset = data?.city.timezone ?? 0;
 
   const displayForecastItems = foreCastItems.map((item) => ({
     date: item.dt,
+    timezone: timezoneOffset,
     weatherDescription: item.weather[0].description,
     lowestTemp: item.main.temp_min,
     highestTemp: item.main.temp_max,
     humidity: item.main.humidity,
     windSpeed: item.wind.speed,
   }));
-
-  console.log(displayForecastItems);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg">

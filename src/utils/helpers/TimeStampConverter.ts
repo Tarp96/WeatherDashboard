@@ -10,3 +10,8 @@ export function timeStampConverter(
     timeZone: "UTC",
   });
 }
+
+  function formatTime(timestamp: number, timezoneOffset: number = 0): string {
+    const localTime = new Date((timestamp + timezoneOffset) * 1000);
+    return localTime.toLocaleDateString("en-CA"); 
+  }

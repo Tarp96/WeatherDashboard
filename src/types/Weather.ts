@@ -41,6 +41,7 @@ export interface FiveDayForecastResponse {
   message: number;
   cnt: number;
   list: ForecastWeatherResponse[];
+  city: ForecastCity;
 }
 
 export interface ForecastWeatherResponse {
@@ -53,6 +54,7 @@ export interface ForecastWeatherResponse {
   pop: number;
   rain?: ForecastRain;
   dt_txt: string;
+  
 }
 
 export interface ForecastMain {
@@ -80,4 +82,8 @@ export interface ForecastWind {
 export interface ForecastRain {
   "3h": number;
 } 
+
+export interface ForecastCity {
+  timezone: number; 
+}
 
