@@ -1,9 +1,15 @@
 import { FiveDayForecastResponse } from "../../types/Weather";
 import { FiveDayForecastCard } from "./FiveDayForecastCard";
+import { formatTime } from "../../utils/helpers/TimeStampConverter";
+import { DisplayForecastItems } from "../../types/Weather";
 
 interface FiveDayForecastContainerProps {
   data?: FiveDayForecastResponse;
 }
+
+type WeatherSortedByDate = {
+  [date: string]: DisplayForecastItems[];
+};
 
 export const FiveDayForecastContainer = ({
   data,
@@ -20,6 +26,17 @@ export const FiveDayForecastContainer = ({
     humidity: item.main.humidity,
     windSpeed: item.wind.speed,
   }));
+
+  const weatherSortedByDate = displayForecastItems.reduce<WeatherSortedByDate>(
+    (groups, current) => {
+      const date = formatTime(current.date, current.timezone);
+      groups[date] ||= [];
+      groups[date].push(current);
+
+      return groups;
+    },
+    {},
+  );
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg">
