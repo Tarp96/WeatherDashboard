@@ -3,6 +3,7 @@ import { FiveDayForecastCard } from "./FiveDayForecastCard";
 import {
   formatTime,
   formatToReadable,
+  formatDateKey,
 } from "../../utils/helpers/TimeStampConverter";
 
 interface FiveDayForecastContainerProps {
@@ -88,8 +89,7 @@ export const FiveDayForecastContainer = ({
         },
       );
 
-      const firstItem = weatherArr[0];
-      const displayDate = formatToReadable(firstItem.date);
+      const displayDate = formatDateKey(dateKey);
 
       const mostCommonDescription =
         Object.entries(dayStats.descriptionCount).sort(
@@ -101,8 +101,8 @@ export const FiveDayForecastContainer = ({
         displayDate: displayDate,
         lowestTemp: Number(dayStats.lowestTemp.toFixed(2)),
         highestTemp: Number(dayStats.highestTemp.toFixed(2)),
-        averageHumidity: (dayStats.sumHumidity / dayStats.count).toFixed(2),
-        averageWindSpeed: (dayStats.sumWindSpeed / dayStats.count).toFixed(2),
+        averageHumidity: dayStats.sumHumidity / dayStats.count,
+        averageWindSpeed: dayStats.sumWindSpeed / dayStats.count,
         mostCommonDescription,
       };
 
@@ -111,16 +111,18 @@ export const FiveDayForecastContainer = ({
     {} as Record<string, any>,
   );
 
-  const displayCards = Object.values(calculatedForcast).map((item) => (
-    <FiveDayForecastCard
-      date={item.displayDate}
-      weatherDescription={item.mostCommonDescription}
-      lowestTemp={item.lowestTemp}
-      highestTemp={item.highestTemp}
-      humidity={item.averageHumidity}
-      windSpeed={item.averageWindSpeed}
-    />
-  ));
+  const displayCards = Object.values(calculatedForcast)
+    .slice(1)
+    .map((item) => (
+      <FiveDayForecastCard
+        date={item.displayDate}
+        weatherDescription={item.mostCommonDescription}
+        lowestTemp={item.lowestTemp}
+        highestTemp={item.highestTemp}
+        humidity={item.averageHumidity.toFixed(2)}
+        windSpeed={item.averageWindSpeed.toFixed(2)}
+      />
+    ));
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg">

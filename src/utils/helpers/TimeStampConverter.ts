@@ -24,3 +24,14 @@ export function formatToReadable(timeStamp: number){
     })
  return displayTime;
 }
+
+export function formatDateKey(dateKey: string){
+  const [year, month, day] = dateKey.split("-").map(Number);
+
+  return new Date(year, month - 1, day).toLocaleDateString("en-GB", {
+    weekday: "short",
+    day: "numeric",
+    month: "long",
+  });
+}
+
