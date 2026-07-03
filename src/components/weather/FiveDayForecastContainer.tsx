@@ -2,7 +2,6 @@ import { FiveDayForecastResponse } from "../../types/Weather";
 import { FiveDayForecastCard } from "./FiveDayForecastCard";
 import {
   formatTime,
-  formatToReadable,
   formatDateKey,
 } from "../../utils/helpers/TimeStampConverter";
 
