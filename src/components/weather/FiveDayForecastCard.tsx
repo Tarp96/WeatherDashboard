@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowUp, Droplet, Wind } from "lucide-react";
 
 interface FiveDayForecastCardProps {
-  date: number;
+  date: number | string;
   weatherDescription: string;
   lowestTemp: number;
   highestTemp: number;
