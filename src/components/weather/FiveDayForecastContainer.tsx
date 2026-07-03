@@ -1,6 +1,9 @@
 import { FiveDayForecastResponse } from "../../types/Weather";
 import { FiveDayForecastCard } from "./FiveDayForecastCard";
-import { formatTime } from "../../utils/helpers/TimeStampConverter";
+import {
+  formatTime,
+  formatToReadable,
+} from "../../utils/helpers/TimeStampConverter";
 
 interface FiveDayForecastContainerProps {
   data?: FiveDayForecastResponse;
@@ -38,16 +41,77 @@ export const FiveDayForecastContainer = ({
 
   const weatherSortedByDate = displayForecastItems.reduce<WeatherSortedByDate>(
     (groups, current) => {
-      const date = formatTime(current.date, current.timezone);
-      groups[date] ||= [];
-      groups[date].push(current);
+      const dateKey = formatTime(current.date, current.timezone);
+      groups[dateKey] ||= [];
+      groups[dateKey].push(current);
 
       return groups;
     },
     {},
   );
 
-  console.log(weatherSortedByDate);
+  const calculatedForcast = Object.entries(weatherSortedByDate).reduce(
+    (acc, [dateKey, weatherArr]) => {
+      if (weatherArr.length === 0) {
+        acc[dateKey] = {
+          lowestTemp: 0,
+          highestTemp: 0,
+          averageHumidity: "0.00",
+          averageWindSpeed: "0.00",
+          mostCommonDescription: "No data",
+        };
+        return acc;
+      }
+
+      const dayStats = weatherArr.reduce(
+        (dayAcc, weatherItem) => ({
+          lowestTemp: Math.min(dayAcc.lowestTemp, weatherItem.lowestTemp),
+          highestTemp: Math.max(dayAcc.highestTemp, weatherItem.highestTemp),
+          sumHumidity: dayAcc.sumHumidity + weatherItem.humidity,
+          sumWindSpeed: dayAcc.sumWindSpeed + weatherItem.windSpeed,
+          count: dayAcc.count + 1,
+
+          descriptionCount: {
+            ...dayAcc.descriptionCount,
+            [weatherItem.weatherDescription]:
+              (dayAcc.descriptionCount[weatherItem.weatherDescription] || 0) +
+              1,
+          },
+        }),
+        {
+          lowestTemp: Infinity,
+          highestTemp: -Infinity,
+          sumHumidity: 0,
+          sumWindSpeed: 0,
+          count: 0,
+          descriptionCount: {} as Record<string, number>,
+        },
+      );
+
+      const firstItem = weatherArr[0];
+      const displayDate = formatToReadable(firstItem.date);
+
+      const mostCommonDescription =
+        Object.entries(dayStats.descriptionCount).sort(
+          (a, b) => b[1] - a[1],
+        )[0]?.[0] || "Unknown";
+
+      acc[dateKey] = {
+        dateKey: dateKey,
+        displayDate: displayDate,
+        lowestTemp: Number(dayStats.lowestTemp.toFixed(2)),
+        highestTemp: Number(dayStats.highestTemp.toFixed(2)),
+        averageHumidity: (dayStats.sumHumidity / dayStats.count).toFixed(2),
+        averageWindSpeed: (dayStats.sumWindSpeed / dayStats.count).toFixed(2),
+        mostCommonDescription,
+      };
+
+      return acc;
+    },
+    {} as Record<string, any>,
+  );
+
+  console.log(calculatedForcast);
 
   return (
     <section className="rounded-2xl border border-slate-200 bg-white p-5 shadow-lg">
