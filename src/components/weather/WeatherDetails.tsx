@@ -14,7 +14,7 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
   return (
     <>
       <div className="rounded-2xl border border-gray-200 bg-white p-4">
-        <h2>Details</h2>
+        <h2 className="mb-4 text-lg font-semibold text-slate-900">Details</h2>
         <div className="grid grid-cols-2 gap-3">
           <WeatherInfoCard
             icon={Sunrise}
