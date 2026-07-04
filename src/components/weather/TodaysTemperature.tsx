@@ -41,7 +41,7 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
         <p>Average Temperature: {averageTemp}°C</p>
       </div>
 
-      <div className="h-[280px]">
+      <div className="mt-6 h-[360px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
