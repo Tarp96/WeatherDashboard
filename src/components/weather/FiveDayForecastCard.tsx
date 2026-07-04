@@ -1,4 +1,5 @@
 import { ArrowDown, ArrowUp, Droplet, Wind } from "lucide-react";
+import { firstLetterUpperCase } from "../../utils/helpers/HelperFunctions";
 
 interface FiveDayForecastCardProps {
   date: number | string;
@@ -17,21 +18,14 @@ export const FiveDayForecastCard = ({
   humidity,
   windSpeed,
 }: FiveDayForecastCardProps) => {
-  const mockForecast = {
-    date: "Sat, Nov 9",
-    weatherDescription: "Clear skies",
-    lowestTemp: 25,
-    highestTemp: 28,
-    humidity: 69,
-    windSpeed: 2.68,
-  };
-
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-lg font-semibold text-slate-900">{date}</p>
-          <p className="text-sm text-slate-500">{weatherDescription}</p>
+          <p className="text-sm text-slate-500">
+            {firstLetterUpperCase(weatherDescription)}
+          </p>
         </div>
 
         <div className="flex items-center gap-5">
