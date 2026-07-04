@@ -27,14 +27,14 @@ export const WeatherOverview = () => {
   if (!currentWeatherQuery.data || !forecastQuery.data) return null;
 
   return (
-    <div className="mx-auto mt-8 max-w-screen-2xl px-6">
-      <div className="grid gap-6 lg:grid-cols-[2fr_1fr]">
+    <div className="mx-auto mt-8 max-w-7xl px-6">
+      <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
         <CityWeatherDisplay data={currentWeatherQuery.data} />
-        <TodaysTemperature data={forecastQuery.data} />
+        <WeatherDetails data={currentWeatherQuery.data} />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[3fr_2fr]">
-        <WeatherDetails data={currentWeatherQuery.data} />
+        <TodaysTemperature data={forecastQuery.data} />
         <FiveDayForecastContainer data={forecastQuery.data} />
       </div>
     </div>
