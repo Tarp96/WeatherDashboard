@@ -45,7 +45,7 @@ export const CityWeatherDisplay = ({ data }: CityWeatherDisplayProps) => {
           <WeatherInfoCard
             icon={Wind}
             label="Wind"
-            value={`${currentConditions.wind_speed.()}m/s`}
+            value={`${currentConditions.wind_speed.toString()}m/s`}
             variant="light"
           />
         </div>
