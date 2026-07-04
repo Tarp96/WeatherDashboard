@@ -33,8 +33,6 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
   const averageTemp =
     chartData && chartData.length > 0 ? totalTemp / chartData.length : 0;
 
-  console.log(averageTemp);
-
   return (
     <section className="flex h-full flex-col rounded-3xl border bg-white p-6 shadow-lg">
       <div className="mb-6">
