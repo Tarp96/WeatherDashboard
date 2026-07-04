@@ -23,7 +23,11 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
     temp: Math.round(forecast.main.temp),
   }));
 
-  console.log(chartData);
+  const temperatures =
+    dailyTemperature?.map((forecast) => Math.round(forecast.main.temp)) ?? [];
+
+  const minTemp = Math.floor(Math.min(...temperatures)) - 2;
+  const maxTemp = Math.ceil(Math.max(...temperatures)) + 2;
 
   const totalTemp = chartData?.reduce((sum, item) => sum + item.temp, 0) ?? 0;
   const averageTemp =
@@ -55,6 +59,7 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
               axisLine={false}
             />
             <YAxis
+              domain={[minTemp, maxTemp]}
               tick={{ fontSize: 12 }}
               tickLine={false}
               axisLine={false}
