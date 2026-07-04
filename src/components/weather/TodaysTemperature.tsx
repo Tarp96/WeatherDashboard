@@ -36,7 +36,7 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
   console.log(averageTemp);
 
   return (
-    <section className="h-full min-h-[360px] rounded-3xl border border-slate-200 bg-white p-6 shadow-xl">
+    <section className="flex h-full flex-col rounded-3xl border bg-white p-6 shadow-lg">
       <div className="mb-6">
         <p className="text-sm font-medium text-slate-500">
           Today&apos;s Temperature
@@ -45,7 +45,7 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
         <p>Average Temperature: {averageTemp}°C</p>
       </div>
 
-      <div className="mt-6 h-[360px]">
+      <div className="mt-6 flex-1">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
