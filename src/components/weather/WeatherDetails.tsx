@@ -2,6 +2,7 @@ import { CityWeatherData } from "../../types/Weather";
 import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
 import { Gauge, Sun, Sunrise, Sunset, Thermometer, Wind } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
+import { DashboardCard } from "../ui/DashboardCard";
 
 interface WeatherDetailsProps {
   data: CityWeatherData;
@@ -12,8 +13,8 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
   const detailsData = weatherData?.data[0];
 
   return (
-    <>
-      <div className="flex h-full flex-col rounded-2xl border border-gray-200 bg-white p-4">
+    <DashboardCard>
+      <div className="flex h-full flex-col">
         <h2 className="mb-4 text-lg font-semibold text-slate-900">Details</h2>
         <div className="grid flex-1 grid-cols-2 gap-5">
           <WeatherInfoCard
@@ -71,6 +72,6 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
           />
         </div>
       </div>
-    </>
+    </DashboardCard>
   );
 };
