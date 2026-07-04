@@ -8,6 +8,7 @@ import {
   ResponsiveContainer,
   CartesianGrid,
 } from "recharts";
+import { DashboardCard } from "../ui/DashboardCard";
 
 interface TodaysTemperatureProps {
   data: FiveDayForecastResponse;
@@ -34,7 +35,7 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
     chartData && chartData.length > 0 ? totalTemp / chartData.length : 0;
 
   return (
-    <section className="flex h-full flex-col rounded-3xl border bg-white p-6 shadow-lg">
+    <DashboardCard className="flex h-full flex-col">
       <div className="mb-6">
         <p className="text-sm font-medium text-slate-500">
           Today&apos;s Temperature
@@ -75,6 +76,6 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
           </LineChart>
         </ResponsiveContainer>
       </div>
-    </section>
+    </DashboardCard>
   );
 };
