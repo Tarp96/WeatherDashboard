@@ -1,5 +1,5 @@
 import { ArrowDown, ArrowUp, Droplet, Wind } from "lucide-react";
-import { firstLetterUpperCase } from "../../utils/helpers/HelperFunctions";
+import { formatWeatherDescription } from "../../utils/helpers/HelperFunctions";
 
 interface FiveDayForecastCardProps {
   date: number | string;
@@ -27,7 +27,7 @@ export const FiveDayForecastCard = ({
           </p>
 
           <p className="mt-1 text-xs text-slate-500 capitalize">
-            {weatherDescription}
+            {formatWeatherDescription(weatherDescription)}
           </p>
         </div>
         <div className="flex items-center gap-5">
