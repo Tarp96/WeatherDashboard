@@ -1,6 +1,6 @@
 import { CityWeatherData } from "../../types/Weather";
 import { Droplets, Wind } from "lucide-react";
-import { WeatherInfoCard } from "./WeatherInfoCard";
+import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 
 interface CityWeatherDisplayProps {
   data: CityWeatherData;

@@ -1,7 +1,7 @@
 import { CityWeatherData } from "../../types/Weather";
 import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
 import { Gauge, Sun, Sunrise, Sunset, Thermometer, Wind } from "lucide-react";
-import { WeatherInfoCard } from "./WeatherInfoCard";
+import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 
 interface WeatherDetailsProps {
   data: CityWeatherData;
