@@ -4,10 +4,8 @@ import { Header } from "../components/layout/Header";
 export const HomePage = () => {
   return (
     <>
-      <div>
+      <div className="bg-gradient-to-r from-sky-50 to-blue-100">
         <Header />
-      </div>
-      <div>
         <WeatherOverview />
       </div>
     </>
