@@ -1,11 +1,11 @@
 import { WeatherOverview } from "../components/weather/WeatherOverview";
+import { Header } from "../components/layout/Header";
 
 export const HomePage = () => {
   return (
     <>
-      <h1 className="text-3xl font-bold underline">Weather Dashboard</h1>
       <div>
-        <h2>Favorites</h2>
+        <Header />
       </div>
       <div>
         <WeatherOverview />
