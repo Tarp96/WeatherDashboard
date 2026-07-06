@@ -3,7 +3,7 @@ import { Header } from "../components/layout/Header";
 import { useState } from "react";
 
 export const HomePage = () => {
-  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>("Oslo");
 
   return (
     <>

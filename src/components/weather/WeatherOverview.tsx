@@ -16,12 +16,12 @@ type WeatherOverviewProps = {
 export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: ["currentWeather", city],
-    queryFn: () => getWeatherDataWithCoordinates("Oslo"),
+    queryFn: () => getWeatherDataWithCoordinates(city),
   });
 
   const forecastQuery = useQuery<FiveDayForecastResponse>({
     queryKey: ["forecast", city],
-    queryFn: () => getFiveDayForecastData("Oslo"),
+    queryFn: () => getFiveDayForecastData(city),
   });
 
   if (currentWeatherQuery.isPending || forecastQuery.isPending)
