@@ -1,11 +1,20 @@
 import { useState } from "react";
+import type { SubmitEventHandler } from "react";
 
 type HeaderProps = {
-  city: string;
+  onSearch: (city: string) => void;
 };
 
-export const Header = ({ city }: HeaderProps) => {
+export const Header = ({ onSearch }: HeaderProps) => {
   const [query, setQuery] = useState("");
+
+  const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
+    e.preventDefault();
+
+    if (!query.trim()) return;
+
+    onSearch(query.trim());
+  };
 
   return (
     <header className="border-b border-blue-100 bg-gradient-to-r from-sky-50 to-blue-100">
@@ -16,12 +25,13 @@ export const Header = ({ city }: HeaderProps) => {
         </h1>
 
         <div className="relative">
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            placeholder="Search city..."
-            className="
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search city..."
+              className="
               w-72
               rounded-xl
               border
@@ -38,7 +48,8 @@ export const Header = ({ city }: HeaderProps) => {
               focus:ring-2
               focus:ring-blue-200
             "
-          />
+            />
+          </form>
         </div>
       </div>
     </header>

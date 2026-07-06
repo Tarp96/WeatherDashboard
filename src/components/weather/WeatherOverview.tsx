@@ -9,14 +9,18 @@ import {
 } from "../../services/api/WeatherService";
 import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 
-export const WeatherOverview = () => {
+type WeatherOverviewProps = {
+  city: string;
+};
+
+export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
   const currentWeatherQuery = useQuery<CityWeatherData>({
-    queryKey: ["currentWeather"],
+    queryKey: ["currentWeather", city],
     queryFn: () => getWeatherDataWithCoordinates("Oslo"),
   });
 
   const forecastQuery = useQuery<FiveDayForecastResponse>({
-    queryKey: ["forecast"],
+    queryKey: ["forecast", city],
     queryFn: () => getFiveDayForecastData("Oslo"),
   });
 

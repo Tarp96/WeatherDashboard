@@ -8,8 +8,8 @@ export const HomePage = () => {
   return (
     <>
       <div className="bg-gradient-to-r from-sky-50 to-blue-100">
-        <Header />
-        <WeatherOverview />
+        <Header onSearch={setSelectedCity} />
+        <WeatherOverview city={selectedCity} />
       </div>
     </>
   );
