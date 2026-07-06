@@ -1,6 +1,10 @@
 import { useState } from "react";
 
-export const Header = () => {
+type HeaderProps = {
+  city: string;
+};
+
+export const Header = ({ city }: HeaderProps) => {
   const [query, setQuery] = useState("");
 
   return (
