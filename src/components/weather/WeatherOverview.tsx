@@ -11,6 +11,8 @@ import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 import { ErrorMessageCard } from "../state/ErrorMessageCard";
 import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
 
+import { NoResultCard } from "../state/NoResultCard";
+
 type WeatherOverviewProps = {
   city: string;
 };
@@ -28,6 +30,7 @@ export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
 
   if (currentWeatherQuery.isPending || forecastQuery.isPending)
     return <WeatherOverviewSkeleton />;
+
   if (currentWeatherQuery.error || forecastQuery.error)
     return <ErrorMessageCard />;
   if (!currentWeatherQuery.data || !forecastQuery.data) return null;
