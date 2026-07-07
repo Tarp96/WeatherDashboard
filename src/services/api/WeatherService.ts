@@ -1,4 +1,4 @@
-import { CityNotFoundError } from "../errors/CityNotFoundError";
+import { CityNotFoundError } from "../../components/errors/CityNotFoundError";
 
 export const getLongLat = async (city: string) => {
   const response = await fetch(
