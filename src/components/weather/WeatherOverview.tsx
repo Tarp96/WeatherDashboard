@@ -10,8 +10,8 @@ import {
 import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 import { ErrorMessageCard } from "../state/ErrorMessageCard";
 import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
-
 import { NoResultCard } from "../state/NoResultCard";
+import { CityNotFoundError } from "../errors/CityNotFoundError";
 
 type WeatherOverviewProps = {
   city: string;
@@ -28,12 +28,24 @@ export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
     queryFn: () => getFiveDayForecastData(city),
   });
 
-  if (currentWeatherQuery.isPending || forecastQuery.isPending)
+  if (currentWeatherQuery.isPending || forecastQuery.isPending) {
     return <WeatherOverviewSkeleton />;
+  }
 
-  if (currentWeatherQuery.error || forecastQuery.error)
+  if (
+    currentWeatherQuery.error instanceof CityNotFoundError ||
+    forecastQuery.error instanceof CityNotFoundError
+  ) {
+    return <NoResultCard queryString={city} />;
+  }
+
+  if (currentWeatherQuery.error || forecastQuery.error) {
     return <ErrorMessageCard />;
-  if (!currentWeatherQuery.data || !forecastQuery.data) return null;
+  }
+
+  if (!currentWeatherQuery.data || !forecastQuery.data) {
+    return null;
+  }
 
   return (
     <div className="mx-auto mt-8 max-w-7xl px-6">
