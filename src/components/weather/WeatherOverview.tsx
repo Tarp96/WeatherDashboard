@@ -12,12 +12,35 @@ import { ErrorMessageCard } from "../state/ErrorMessageCard";
 import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
 import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
+import { useState, useEffect } from "react";
 
 type WeatherOverviewProps = {
   city: string;
 };
 
 export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
+  const [geo, setGeo] = useState({ lat: 0, lon: 0 });
+
+  useEffect(() => {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const latitude = position.coords.latitude;
+          const longitude = position.coords.longitude;
+          setGeo({
+            lat: latitude,
+            lon: longitude,
+          });
+        },
+        (error) => {
+          console.error("Error code = " + error.code);
+        },
+      );
+    } else {
+      console.log("Something went wrong");
+    }
+  }, []);
+
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: ["currentWeather", city],
     queryFn: () => getWeatherDataWithCoordinates(city),
