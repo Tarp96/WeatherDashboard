@@ -8,11 +8,12 @@ export const Footer = () => {
           <p>Powered by OpenWeather API.</p>
 
           <div className="flex gap-4">
-            <a href="#">GitHub</a>
-            <a href="#">LinkedIn</a>
+            <a href="https://github.com/Tarp96/WeatherDashboard">
+              View source on GitHub
+            </a>
           </div>
 
-          <p>© 2026 Tarpinder Singh</p>
+          <p>© 2026 Tarpinderjot Singh</p>
         </div>
       </footer>
     </>

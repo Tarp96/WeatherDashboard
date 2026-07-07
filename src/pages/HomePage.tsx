@@ -8,9 +8,13 @@ export const HomePage = () => {
 
   return (
     <>
-      <div className="bg-gradient-to-r from-sky-50 to-blue-100">
+      <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
         <Header onSearch={setSelectedCity} />
-        <WeatherOverview city={selectedCity} />
+
+        <main className="flex-1">
+          <WeatherOverview city={selectedCity} />
+        </main>
+
         <Footer />
       </div>
     </>
