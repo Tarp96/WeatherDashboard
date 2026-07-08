@@ -6,6 +6,7 @@ import { CityWeatherData, FiveDayForecastResponse } from "../../types/Weather";
 import {
   getFiveDayForecastData,
   getWeatherDataWithCoordinates,
+  getFiveDayForecastByCoordinates,
 } from "../../services/api/WeatherService";
 import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 import { ErrorMessageCard } from "../state/ErrorMessageCard";
@@ -48,13 +49,29 @@ export const WeatherOverview = ({
   }, [useCurrentLocation]);
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
-    queryKey: ["currentWeather", city],
-    queryFn: () => getWeatherDataWithCoordinates(city),
+    queryKey: useCurrentLocation
+      ? ["currentWeather", geo?.lat, geo?.lon]
+      : ["currentWeather", city],
+
+    queryFn: () =>
+      useCurrentLocation
+        ? getFiveDayForecastByCoordinates(geo!.lat, geo!.lon)
+        : getWeatherDataWithCoordinates(city),
+
+    enabled: useCurrentLocation ? !!geo : !!city,
   });
 
   const forecastQuery = useQuery<FiveDayForecastResponse>({
-    queryKey: ["forecast", city],
-    queryFn: () => getFiveDayForecastData(city),
+    queryKey: useCurrentLocation
+      ? ["forecast", geo?.lat, geo?.lon]
+      : ["forecast", city],
+
+    queryFn: () =>
+      useCurrentLocation
+        ? getFiveDayForecastByCoordinates(geo!.lat, geo!.lon)
+        : getFiveDayForecastData(city),
+
+    enabled: useCurrentLocation ? !!geo : !!city,
   });
 
   if (currentWeatherQuery.isPending || forecastQuery.isPending) {
