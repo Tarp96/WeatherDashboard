@@ -25,14 +25,34 @@ export const getCoordinatesByCity = async (city: string) => {
 };
 
 export const getCityWithCoordinates = async (lat: number, lon: number) => {
-  const response = await fetch(`
-    http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit={limit}&appid=${import.meta.env.VITE_API_KEY}
-    `);
+  const response = await fetch(
+    `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${import.meta.env.VITE_API_KEY}`,
+  );
 
   if (!response.ok) {
     throw new Error("Failed to fetch city name");
   }
+
   return response.json();
+};
+
+export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
+  const locationData = await getCityWithCoordinates(lat, lon);
+
+  if (!locationData.length) {
+    throw new Error("Location not found");
+  }
+
+  const { name, country, state } = locationData[0];
+
+  const weather = await getWeatherData(lat, lon);
+
+  return {
+    city: name,
+    country,
+    state,
+    weather,
+  };
 };
 
 export const getWeatherDataWithCoordinates = async (city: string) => {

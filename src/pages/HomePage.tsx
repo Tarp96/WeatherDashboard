@@ -4,8 +4,8 @@ import { Footer } from "../components/layout/Footer";
 import { useState } from "react";
 
 export const HomePage = () => {
-  const [selectedCity, setSelectedCity] = useState<string>("Oslo");
-  const [useCurrentLocation, setUseCurrentLocation] = useState(false);
+  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [useCurrentLocation, setUseCurrentLocation] = useState(true);
 
   return (
     <>

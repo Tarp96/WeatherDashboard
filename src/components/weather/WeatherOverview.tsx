@@ -7,6 +7,7 @@ import {
   getFiveDayForecastData,
   getWeatherDataWithCoordinates,
   getFiveDayForecastByCoordinates,
+  getWeatherDataByCoordinates,
 } from "../../services/api/WeatherService";
 import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 import { ErrorMessageCard } from "../state/ErrorMessageCard";
@@ -55,7 +56,7 @@ export const WeatherOverview = ({
 
     queryFn: () =>
       useCurrentLocation
-        ? getFiveDayForecastByCoordinates(geo!.lat, geo!.lon)
+        ? getWeatherDataByCoordinates(geo!.lat, geo!.lon)
         : getWeatherDataWithCoordinates(city),
 
     enabled: useCurrentLocation ? !!geo : !!city,
