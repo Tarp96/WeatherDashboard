@@ -19,11 +19,13 @@ import { useState, useEffect } from "react";
 type WeatherOverviewProps = {
   city: string;
   useCurrentLocation: boolean;
+  onSearchingChange: (loading: boolean) => void;
 };
 
 export const WeatherOverview = ({
   city,
   useCurrentLocation,
+  onSearchingChange,
 }: WeatherOverviewProps) => {
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
 
@@ -74,6 +76,12 @@ export const WeatherOverview = ({
 
     enabled: useCurrentLocation ? !!geo : !!city,
   });
+
+  const isSearching = currentWeatherQuery.isPending || forecastQuery.isPending;
+
+  useEffect(() => {
+    onSearchingChange(isSearching);
+  }, [isSearching, onSearchingChange]);
 
   if (currentWeatherQuery.isPending || forecastQuery.isPending) {
     return <WeatherOverviewSkeleton />;

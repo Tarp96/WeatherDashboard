@@ -4,9 +4,10 @@ import { Search } from "lucide-react";
 
 type HeaderProps = {
   onSearch: (city: string) => void;
+  isSearching: boolean;
 };
 
-export const Header = ({ onSearch }: HeaderProps) => {
+export const Header = ({ onSearch, isSearching }: HeaderProps) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
@@ -30,6 +31,7 @@ export const Header = ({ onSearch }: HeaderProps) => {
             <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
 
             <input
+              disabled={isSearching}
               type="text"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
