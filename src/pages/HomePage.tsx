@@ -7,10 +7,15 @@ export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [useCurrentLocation, setUseCurrentLocation] = useState(true);
 
+  const handleSearch = (city: string) => {
+    setSelectedCity(city);
+    setUseCurrentLocation(false);
+  };
+
   return (
     <>
       <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
-        <Header onSearch={setSelectedCity} />
+        <Header onSearch={handleSearch} />
 
         <main className="flex-1">
           <WeatherOverview
