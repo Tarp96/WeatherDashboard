@@ -5,6 +5,7 @@ import { useState } from "react";
 
 export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("Oslo");
+  const [useCurrentLocation, setUseCurrentLocation] = useState(false);
 
   return (
     <>
@@ -12,7 +13,10 @@ export const HomePage = () => {
         <Header onSearch={setSelectedCity} />
 
         <main className="flex-1">
-          <WeatherOverview city={selectedCity} />
+          <WeatherOverview
+            city={selectedCity}
+            useCurrentLocation={useCurrentLocation}
+          />
         </main>
 
         <Footer />

@@ -16,12 +16,18 @@ import { useState, useEffect } from "react";
 
 type WeatherOverviewProps = {
   city: string;
+  useCurrentLocation: boolean;
 };
 
-export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
-  const [geo, setGeo] = useState({ lat: 0, lon: 0 });
+export const WeatherOverview = ({
+  city,
+  useCurrentLocation,
+}: WeatherOverviewProps) => {
+  const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
 
   useEffect(() => {
+    if (!useCurrentLocation) return;
+
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -39,7 +45,7 @@ export const WeatherOverview = ({ city }: WeatherOverviewProps) => {
     } else {
       console.log("Something went wrong");
     }
-  }, []);
+  }, [useCurrentLocation]);
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: ["currentWeather", city],
