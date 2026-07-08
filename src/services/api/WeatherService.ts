@@ -1,5 +1,17 @@
 import { CityNotFoundError } from "../../components/errors/CityNotFoundError";
 
+export const getWeatherData = async (lat: number, lon: number) => {
+   const response = await fetch(
+    `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch weather data");
+  }
+
+  return response.json();
+}
+
 export const getLongLat = async (city: string) => {
   const response = await fetch(
     `https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${import.meta.env.VITE_API_KEY}`
@@ -16,26 +28,18 @@ export const getWeatherDataWithCoordinates = async (city: string) => {
   const geoData = await getLongLat(city);
 
   if (!geoData.length) {
-  throw new CityNotFoundError(city);
-}
-
-  const { lat, lon } = geoData[0];
-
-  const response = await fetch(
-    `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`
-  );
-
-  if (!response.ok) {
-    throw new Error("Failed to fetch weather data");
+    throw new CityNotFoundError(city);
   }
 
-  const weatherData = await response.json();
+  const { lat, lon, name, country, state } = geoData[0];
+
+  const weather = await getWeatherData(lat, lon);
 
   return {
-    city: geoData[0].name,
-    country: geoData[0].country,
-    state: geoData[0].state,
-    weather: weatherData,
+    city: name,
+    country,
+    state,
+    weather,
   };
 };
 
