@@ -24,7 +24,7 @@ export const getCoordinatesByCity = async (city: string) => {
   return response.json();
 };
 
-export const getCityWithCoordinates = async (lat: number, lon: number) => {
+export const getCityByCoordinates = async (lat: number, lon: number) => {
   const response = await fetch(
     `https://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${lon}&limit=1&appid=${import.meta.env.VITE_API_KEY}`,
   );
@@ -37,7 +37,7 @@ export const getCityWithCoordinates = async (lat: number, lon: number) => {
 };
 
 export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
-  const locationData = await getCityWithCoordinates(lat, lon);
+  const locationData = await getCityByCoordinates(lat, lon);
 
   if (!locationData.length) {
     throw new Error("Location not found");
