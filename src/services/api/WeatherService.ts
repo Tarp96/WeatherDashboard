@@ -54,14 +54,7 @@ export const getWeatherDataWithCoordinates = async (city: string) => {
   };
 };
 
-export const getFiveDayForecastData = async (city: string) => {
-  const geoData = await getCoordinatesByCity(city);
-
-  if (!geoData.length) {
-    throw new CityNotFoundError(city);
-  }
-
-  const { lat, lon } = geoData[0];
+const fetchFiveDayForecast = async (lat: number, lon: number) => {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`,
   );
@@ -70,6 +63,24 @@ export const getFiveDayForecastData = async (city: string) => {
     throw new Error("Failed to fetch weather data");
   }
 
-  const forecastData = await response.json();
-  return forecastData;
+  return response.json();
+};
+
+export const getFiveDayForecastData = async (city: string) => {
+  const geoData = await getCoordinatesByCity(city);
+
+  if (!geoData.length) {
+    throw new CityNotFoundError(city);
+  }
+
+  const { lat, lon } = geoData[0];
+
+  return fetchFiveDayForecast(lat, lon);
+};
+
+export const getFiveDayForecastByCoordinates = async (
+  lat: number,
+  lon: number,
+) => {
+  return fetchFiveDayForecast(lat, lon);
 };
