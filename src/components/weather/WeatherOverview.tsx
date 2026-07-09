@@ -15,6 +15,7 @@ import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
 import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
 import { useState, useEffect } from "react";
+import { Star } from "lucide-react";
 
 type WeatherOverviewProps = {
   city: string;
@@ -105,6 +106,26 @@ export const WeatherOverview = ({
 
   return (
     <div className="mx-auto mt-8 max-w-7xl px-6">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <h2 className="text-2xl font-bold text-slate-800">
+            Weather Overview
+          </h2>
+
+          <p className="text-sm text-slate-500">
+            Current weather and forecast for your selected location.
+          </p>
+        </div>
+
+        <button
+          type="button"
+          className="flex cursor-pointer items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
+        >
+          <Star className="h-4 w-4" />
+          Add to Favorites
+        </button>
+      </div>
+
       <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
         <CityWeatherDisplay data={currentWeatherQuery.data} />
         <WeatherDetails data={currentWeatherQuery.data} />
