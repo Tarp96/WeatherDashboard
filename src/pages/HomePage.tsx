@@ -38,8 +38,8 @@ export const HomePage = () => {
 
     "Dubai",
     "Doha",
-
-    "McMurdo Station",
+    "Reykjavik",
+    "Honolulu",
   ];
 
   const handleSearch = (city: string) => {

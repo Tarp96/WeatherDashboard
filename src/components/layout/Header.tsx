@@ -92,10 +92,12 @@ export const Header = ({
           <button
             type="button"
             onClick={onUseCurrentLocation}
-            className="flex cursor-pointer items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+            className="group flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-blue-600 transition-all duration-200 hover:border-blue-200 hover:bg-white/60 hover:text-blue-700"
           >
-            <MapPin className="h-5 w-5" />
-            Current Location
+            <MapPin className="h-4 w-4 transition-transform group-hover:scale-110" />
+            <span className="underline underline-offset-4">
+              Current Location
+            </span>
           </button>
         </div>
       </div>
