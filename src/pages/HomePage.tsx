@@ -7,6 +7,7 @@ export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
 
   const fallbackCities = [
     "Oslo",
@@ -48,8 +49,26 @@ export const HomePage = () => {
   };
 
   const handleUseCurrentLocation = () => {
-    setSelectedCity("");
-    setUseCurrentLocation(true);
+    if (!navigator.geolocation) {
+      handleLocationFallback();
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setGeo({
+          lat: position.coords.latitude,
+          lon: position.coords.longitude,
+        });
+
+        setSelectedCity("");
+        setUseCurrentLocation(true);
+      },
+      (error) => {
+        console.error("Geolocation error:", error);
+        handleLocationFallback();
+      },
+    );
   };
 
   const handleLocationFallback = useCallback(() => {
@@ -74,6 +93,7 @@ export const HomePage = () => {
             useCurrentLocation={useCurrentLocation}
             onSearchingChange={setIsSearching}
             onLocationFallback={handleLocationFallback}
+            geo={geo}
           />
         </main>
 

@@ -23,6 +23,7 @@ type WeatherOverviewProps = {
   useCurrentLocation: boolean;
   onSearchingChange: (loading: boolean) => void;
   onLocationFallback: () => void;
+  geo: { lat: number; lon: number } | null;
 };
 
 export const WeatherOverview = ({
@@ -30,30 +31,8 @@ export const WeatherOverview = ({
   useCurrentLocation,
   onSearchingChange,
   onLocationFallback,
+  geo,
 }: WeatherOverviewProps) => {
-  const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
-
-  useEffect(() => {
-    if (!useCurrentLocation) return;
-
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setGeo({
-            lat: position.coords.latitude,
-            lon: position.coords.longitude,
-          });
-        },
-        (error) => {
-          console.error("Geolocation error:", error);
-          onLocationFallback();
-        },
-      );
-    } else {
-      onLocationFallback();
-    }
-  }, [useCurrentLocation, onLocationFallback]);
-
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
       ? ["currentWeather", geo?.lat, geo?.lon]
