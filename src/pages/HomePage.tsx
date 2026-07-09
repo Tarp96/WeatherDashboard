@@ -8,6 +8,40 @@ export const HomePage = () => {
   const [useCurrentLocation, setUseCurrentLocation] = useState(true);
   const [isSearching, setIsSearching] = useState(false);
 
+  const fallbackCities = [
+    "Oslo",
+    "London",
+    "Paris",
+    "Rome",
+    "Berlin",
+
+    "New York",
+    "Toronto",
+    "Mexico City",
+    "Vancouver",
+
+    "Rio de Janeiro",
+    "Buenos Aires",
+    "Lima",
+
+    "Cape Town",
+    "Cairo",
+    "Nairobi",
+
+    "Tokyo",
+    "Seoul",
+    "Bangkok",
+    "Singapore",
+
+    "Sydney",
+    "Auckland",
+
+    "Dubai",
+    "Doha",
+
+    "McMurdo Station",
+  ];
+
   const handleSearch = (city: string) => {
     setSelectedCity(city);
     setUseCurrentLocation(false);
@@ -19,19 +53,9 @@ export const HomePage = () => {
   };
 
   const handleLocationFallback = useCallback(() => {
-    const randomCityList = [
-      "Oslo",
-      "Berlin",
-      "Tokyo",
-      "London",
-      "New York",
-      "Mexico City",
-      "Roma",
-    ];
+    const randomCity = Math.floor(Math.random() * fallbackCities.length);
 
-    const randomCity = Math.floor(Math.random() * randomCityList.length);
-
-    setSelectedCity(randomCityList[randomCity]);
+    setSelectedCity(fallbackCities[randomCity]);
     setUseCurrentLocation(false);
   }, []);
 
