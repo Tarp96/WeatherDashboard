@@ -22,7 +22,6 @@ type WeatherOverviewProps = {
   city: string;
   useCurrentLocation: boolean;
   onSearchingChange: (loading: boolean) => void;
-  onLocationFallback: () => void;
   geo: { lat: number; lon: number } | null;
 };
 
@@ -30,7 +29,6 @@ export const WeatherOverview = ({
   city,
   useCurrentLocation,
   onSearchingChange,
-  onLocationFallback,
   geo,
 }: WeatherOverviewProps) => {
   const currentWeatherQuery = useQuery<CityWeatherData>({

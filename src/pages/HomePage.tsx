@@ -50,7 +50,7 @@ export const HomePage = () => {
 
   const handleUseCurrentLocation = () => {
     if (!navigator.geolocation) {
-      handleLocationFallback();
+      showRandomCity();
       return;
     }
 
@@ -66,12 +66,12 @@ export const HomePage = () => {
       },
       (error) => {
         console.error("Geolocation error:", error);
-        handleLocationFallback();
+        showRandomCity();
       },
     );
   };
 
-  const handleLocationFallback = useCallback(() => {
+  const showRandomCity = useCallback(() => {
     const randomCity = Math.floor(Math.random() * fallbackCities.length);
 
     setSelectedCity(fallbackCities[randomCity]);
@@ -92,7 +92,6 @@ export const HomePage = () => {
             city={selectedCity}
             useCurrentLocation={useCurrentLocation}
             onSearchingChange={setIsSearching}
-            onLocationFallback={handleLocationFallback}
             geo={geo}
           />
         </main>
