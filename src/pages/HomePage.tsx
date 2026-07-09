@@ -5,7 +5,7 @@ import { useState, useCallback } from "react";
 
 export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
-  const [useCurrentLocation, setUseCurrentLocation] = useState(true);
+  const [useCurrentLocation, setUseCurrentLocation] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
 
   const fallbackCities = [
