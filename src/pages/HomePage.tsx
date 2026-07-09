@@ -14,7 +14,19 @@ export const HomePage = () => {
   };
 
   const handleLocationFallback = useCallback(() => {
-    setSelectedCity("Oslo");
+    const randomCityList = [
+      "Oslo",
+      "Berlin",
+      "Tokyo",
+      "London",
+      "New York",
+      "Mexico City",
+      "Roma",
+    ];
+
+    const randomCity = Math.floor(Math.random() * randomCityList.length);
+
+    setSelectedCity(randomCityList[randomCity]);
     setUseCurrentLocation(false);
   }, []);
 
