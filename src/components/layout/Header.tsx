@@ -1,13 +1,18 @@
 import { useState } from "react";
 import type { SubmitEventHandler } from "react";
-import { Search } from "lucide-react";
+import { Search, MapPin } from "lucide-react";
 
 type HeaderProps = {
   onSearch: (city: string) => void;
   isSearching: boolean;
+  onUseCurrentLocation: () => void;
 };
 
-export const Header = ({ onSearch, isSearching }: HeaderProps) => {
+export const Header = ({
+  onSearch,
+  isSearching,
+  onUseCurrentLocation,
+}: HeaderProps) => {
   const [query, setQuery] = useState("");
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
@@ -84,6 +89,14 @@ export const Header = ({ onSearch, isSearching }: HeaderProps) => {
               {isSearching ? "Searching..." : "Search"}
             </button>
           </form>
+          <button
+            type="button"
+            onClick={onUseCurrentLocation}
+            className="flex cursor-pointer items-center gap-2 rounded-xl bg-blue-600 px-4 py-2 text-white transition hover:bg-blue-700"
+          >
+            <MapPin className="h-5 w-5" />
+            Current Location
+          </button>
         </div>
       </div>
     </header>

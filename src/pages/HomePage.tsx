@@ -13,6 +13,11 @@ export const HomePage = () => {
     setUseCurrentLocation(false);
   };
 
+  const handleUseCurrentLocation = () => {
+    setSelectedCity("");
+    setUseCurrentLocation(true);
+  };
+
   const handleLocationFallback = useCallback(() => {
     const randomCityList = [
       "Oslo",
@@ -33,7 +38,11 @@ export const HomePage = () => {
   return (
     <>
       <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
-        <Header onSearch={handleSearch} isSearching={isSearching} />
+        <Header
+          onSearch={handleSearch}
+          isSearching={isSearching}
+          onUseCurrentLocation={handleUseCurrentLocation}
+        />
 
         <main className="flex-1">
           <WeatherOverview
