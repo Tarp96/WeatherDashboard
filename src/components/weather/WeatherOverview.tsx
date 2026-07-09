@@ -20,12 +20,14 @@ type WeatherOverviewProps = {
   city: string;
   useCurrentLocation: boolean;
   onSearchingChange: (loading: boolean) => void;
+  onLocationFallback: () => void;
 };
 
 export const WeatherOverview = ({
   city,
   useCurrentLocation,
   onSearchingChange,
+  onLocationFallback,
 }: WeatherOverviewProps) => {
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
 
@@ -35,21 +37,20 @@ export const WeatherOverview = ({
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
-          const latitude = position.coords.latitude;
-          const longitude = position.coords.longitude;
           setGeo({
-            lat: latitude,
-            lon: longitude,
+            lat: position.coords.latitude,
+            lon: position.coords.longitude,
           });
         },
         (error) => {
-          console.error("Error code = " + error.code);
+          console.error("Geolocation error:", error);
+          onLocationFallback();
         },
       );
     } else {
-      console.log("Something went wrong");
+      onLocationFallback();
     }
-  }, [useCurrentLocation]);
+  }, [useCurrentLocation, onLocationFallback]);
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
