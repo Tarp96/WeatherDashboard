@@ -14,7 +14,7 @@ import { ErrorMessageCard } from "../state/ErrorMessageCard";
 import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
 import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Star } from "lucide-react";
 import { setItem } from "../../utils/helpers/LocalStorage";
 
