@@ -1,7 +1,7 @@
 import { WeatherOverview } from "../components/weather/WeatherOverview";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
@@ -43,6 +43,10 @@ export const HomePage = () => {
     "Honolulu",
   ];
 
+  useEffect(() => {
+    getRandomFallbackCity();
+  }, []);
+
   const handleSearch = (city: string) => {
     setSelectedCity(city);
     setUseCurrentLocation(false);
@@ -71,10 +75,13 @@ export const HomePage = () => {
     );
   };
 
-  const showRandomCity = useCallback(() => {
-    const randomCity = Math.floor(Math.random() * fallbackCities.length);
+  const getRandomFallbackCity = () => {
+    const randomIndex = Math.floor(Math.random() * fallbackCities.length);
+    return fallbackCities[randomIndex];
+  };
 
-    setSelectedCity(fallbackCities[randomCity]);
+  const showRandomCity = useCallback(() => {
+    getRandomFallbackCity();
     setUseCurrentLocation(false);
   }, []);
 
