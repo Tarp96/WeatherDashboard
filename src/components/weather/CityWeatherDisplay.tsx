@@ -5,9 +5,13 @@ import { DashboardCard } from "../ui/DashboardCard";
 
 interface CityWeatherDisplayProps {
   data: CityWeatherData;
+  isFeaturedCity: boolean;
 }
 
-export const CityWeatherDisplay = ({ data }: CityWeatherDisplayProps) => {
+export const CityWeatherDisplay = ({
+  data,
+  isFeaturedCity,
+}: CityWeatherDisplayProps) => {
   const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
   const weatherDescription = currentConditions.weather[0];
@@ -16,6 +20,11 @@ export const CityWeatherDisplay = ({ data }: CityWeatherDisplayProps) => {
     <DashboardCard className="grid h-full grid-cols-1 gap-6 md:grid-cols-[2fr_1fr]">
       {" "}
       <div className="rounded-2xl bg-gray-50 p-6">
+        {isFeaturedCity && (
+          <p className="mb-2 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
+            Featured City
+          </p>
+        )}
         <div>
           <h2 className="text-3xl font-bold text-gray-900">
             {data.city}

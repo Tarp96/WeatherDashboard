@@ -23,6 +23,7 @@ type WeatherOverviewProps = {
   useCurrentLocation: boolean;
   onSearchingChange: (loading: boolean) => void;
   geo: { lat: number; lon: number } | null;
+  isFeaturedCity: boolean;
 };
 
 export const WeatherOverview = ({
@@ -30,6 +31,7 @@ export const WeatherOverview = ({
   useCurrentLocation,
   onSearchingChange,
   geo,
+  isFeaturedCity,
 }: WeatherOverviewProps) => {
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
@@ -106,7 +108,10 @@ export const WeatherOverview = ({
       </div>
 
       <div className="grid gap-6 lg:grid-cols-[3fr_2fr]">
-        <CityWeatherDisplay data={currentWeatherQuery.data} />
+        <CityWeatherDisplay
+          data={currentWeatherQuery.data}
+          isFeaturedCity={isFeaturedCity}
+        />
         <WeatherDetails data={currentWeatherQuery.data} />
       </div>
 

@@ -3,11 +3,14 @@ import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { useState, useCallback, useEffect } from "react";
 
+type LocationMode = "featured" | "search" | "current";
+
 export const HomePage = () => {
   const [selectedCity, setSelectedCity] = useState<string>("");
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
+  const [locationMode, setLocationMode] = useState<LocationMode>("featured");
 
   const fallbackCities = [
     "Oslo",
@@ -45,16 +48,20 @@ export const HomePage = () => {
 
   useEffect(() => {
     getRandomFallbackCity();
+    setLocationMode("featured");
   }, []);
 
   const handleSearch = (city: string) => {
     setSelectedCity(city);
     setUseCurrentLocation(false);
+    setLocationMode("search");
   };
 
   const handleUseCurrentLocation = () => {
     if (!navigator.geolocation) {
-      showRandomCity();
+      setSelectedCity(getRandomFallbackCity());
+      setUseCurrentLocation(false);
+      setLocationMode("featured");
       return;
     }
 
@@ -65,12 +72,15 @@ export const HomePage = () => {
           lon: position.coords.longitude,
         });
 
-        setSelectedCity("");
         setUseCurrentLocation(true);
+        setLocationMode("current");
       },
       (error) => {
         console.error("Geolocation error:", error);
-        showRandomCity();
+
+        setSelectedCity(getRandomFallbackCity());
+        setUseCurrentLocation(false);
+        setLocationMode("featured");
       },
     );
   };
@@ -79,11 +89,6 @@ export const HomePage = () => {
     const randomIndex = Math.floor(Math.random() * fallbackCities.length);
     return fallbackCities[randomIndex];
   };
-
-  const showRandomCity = useCallback(() => {
-    getRandomFallbackCity();
-    setUseCurrentLocation(false);
-  }, []);
 
   return (
     <>
@@ -100,6 +105,7 @@ export const HomePage = () => {
             useCurrentLocation={useCurrentLocation}
             onSearchingChange={setIsSearching}
             geo={geo}
+            isFeaturedCity={locationMode === "featured"}
           />
         </main>
 
