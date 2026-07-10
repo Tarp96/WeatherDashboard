@@ -1,7 +1,7 @@
 import { WeatherOverview } from "../components/weather/WeatherOverview";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
-import { useState, useCallback, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -47,7 +47,7 @@ export const HomePage = () => {
   ];
 
   useEffect(() => {
-    getRandomFallbackCity();
+    setSelectedCity(getRandomFallbackCity());
     setLocationMode("featured");
   }, []);
 
