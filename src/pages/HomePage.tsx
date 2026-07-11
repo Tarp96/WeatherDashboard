@@ -60,7 +60,7 @@ export const HomePage = () => {
     setLocationMode("featured");
   }, []);
 
-  const handleCityToDisplay = (city: string) => {
+  const handleSelectCity = (city: string) => {
     setSelectedCity(city);
     setUseCurrentLocation(false);
     setLocationMode("search");
@@ -74,12 +74,6 @@ export const HomePage = () => {
   const handleRemoveFromFavorites = (city: string) => {
     removeCityFromFavorites(city);
     setFavoriteCities(getFavoriteCities());
-  };
-
-  const handleSearch = (city: string) => {
-    setSelectedCity(city);
-    setUseCurrentLocation(false);
-    setLocationMode("search");
   };
 
   const handleUseCurrentLocation = () => {
@@ -119,7 +113,7 @@ export const HomePage = () => {
     <>
       <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
         <Header
-          onSearch={handleSearch}
+          onSearch={handleSelectCity}
           isSearching={isSearching}
           onUseCurrentLocation={handleUseCurrentLocation}
         />
@@ -128,7 +122,7 @@ export const HomePage = () => {
           <FavoritesBar
             favoriteCityList={favoriteCities}
             onRemoveFavorite={handleRemoveFromFavorites}
-            onDisplayCity={handleCityToDisplay}
+            onDisplayCity={handleSelectCity}
           />
           <WeatherOverview
             city={selectedCity}
