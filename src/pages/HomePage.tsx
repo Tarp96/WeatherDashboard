@@ -60,6 +60,10 @@ export const HomePage = () => {
     setLocationMode("featured");
   }, []);
 
+  const handleCityToDisplay = (city: string) => {
+    setSelectedCity(city);
+  };
+
   const handleAddToFavorites = (city: string) => {
     addCityToFavorites(city);
     setFavoriteCities(getFavoriteCities());
@@ -122,6 +126,7 @@ export const HomePage = () => {
           <FavoritesBar
             favoriteCityList={favoriteCities}
             onRemoveFavorite={handleRemoveFromFavorites}
+            onDisplayCity={handleCityToDisplay}
           />
           <WeatherOverview
             city={selectedCity}

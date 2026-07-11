@@ -7,6 +7,7 @@ type FavoriteCityCardProps = {
   feelsLike: number;
   icon: string;
   onRemoveFavorite: (city: string) => void;
+  onDisplayCity: (city: string) => void;
 };
 
 export const FavoriteCityCard = ({
@@ -16,9 +17,13 @@ export const FavoriteCityCard = ({
   feelsLike,
   icon,
   onRemoveFavorite,
+  onDisplayCity,
 }: FavoriteCityCardProps) => {
   return (
-    <article className="relative flex w-64 items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
+    <article
+      onClick={() => onDisplayCity(city)}
+      className="relative flex w-64 items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
+    >
       <div className="flex flex-col">
         <header>
           <h3 className="text-lg font-semibold text-slate-800">{city}</h3>
