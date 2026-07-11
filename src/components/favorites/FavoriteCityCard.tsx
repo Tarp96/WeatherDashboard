@@ -2,16 +2,14 @@ type FavoriteCityCardProps = {
   city: string;
   country: string;
   temp: number;
-  highestTemp: number;
-  lowestTemp: number;
+  feelsLike: number;
 };
 
 export const FavoriteCityCard = ({
   city,
   country,
   temp,
-  highestTemp,
-  lowestTemp,
+  feelsLike,
 }: FavoriteCityCardProps) => {
   return (
     <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition hover:shadow-lg">
@@ -25,8 +23,7 @@ export const FavoriteCityCard = ({
       </section>
 
       <footer className="flex justify-between text-sm text-slate-600">
-        <span>H: {highestTemp}°</span>
-        <span>L: {lowestTemp}°</span>
+        <span>Feels Like: {feelsLike}</span>
       </footer>
     </article>
   );

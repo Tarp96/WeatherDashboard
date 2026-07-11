@@ -1,6 +1,10 @@
 import { CityNotFoundError } from "../../components/errors/CityNotFoundError";
+import { WeatherApiResponse, CityWeatherData } from "../../types/Weather";
 
-export const getWeatherData = async (lat: number, lon: number) => {
+export const getWeatherData = async (
+  lat: number,
+  lon: number,
+): Promise<WeatherApiResponse> => {
   const response = await fetch(
     `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`,
   );
@@ -55,7 +59,9 @@ export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
   };
 };
 
-export const getWeatherDataWithCoordinates = async (city: string) => {
+export const getWeatherDataWithCoordinates = async (
+  city: string,
+): Promise<CityWeatherData> => {
   const geoData = await getCoordinatesByCity(city);
 
   if (!geoData.length) {
@@ -63,7 +69,6 @@ export const getWeatherDataWithCoordinates = async (city: string) => {
   }
 
   const { lat, lon, name, country, state } = geoData[0];
-
   const weather = await getWeatherData(lat, lon);
 
   return {

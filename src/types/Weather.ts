@@ -1,31 +1,33 @@
 export interface CityWeatherData {
-    city: string; 
-    country: string;
-    state: string;
-    weather: WeatherApiResponse;
+  city: string;
+  country: string;
+  state: string;
+  weather: WeatherApiResponse;
 }
 
 export interface WeatherDescription {
-    id: number; 
-    main: string; 
-    description: string;
-    icon: string;
+  id: number;
+  main: string;
+  description: string;
+  icon: string;
 }
 
 export interface CurrentConditions {
+  dt: number;
+  sunrise: number;
+  sunset: number;
   temp: number;
   feels_like: number;
   pressure: number;
   humidity: number;
+  dew_point: number;
+  uvi: number;
+  clouds: number;
+  visibility: number;
   wind_speed: number;
   wind_deg: number;
-  sunrise: number;
-  sunset: number;
-  visibility: number;
-  clouds: number;
-  uvi: number;
-  dew_point: number;
   weather: WeatherDescription[];
+  alerts: string[];
 }
 
 export interface WeatherApiResponse {
@@ -54,7 +56,6 @@ export interface ForecastWeatherResponse {
   pop: number;
   rain?: ForecastRain;
   dt_txt: string;
-  
 }
 
 export interface ForecastMain {
@@ -81,11 +82,8 @@ export interface ForecastWind {
 
 export interface ForecastRain {
   "3h": number;
-} 
-
-export interface ForecastCity {
-  timezone: number; 
 }
 
-
-
+export interface ForecastCity {
+  timezone: number;
+}
