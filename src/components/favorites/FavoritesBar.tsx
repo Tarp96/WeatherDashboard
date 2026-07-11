@@ -41,6 +41,7 @@ export const FavoritesBar = () => {
         country={query.data.country}
         temp={currentWeather.temp}
         feelsLike={currentWeather.feels_like}
+        icon={currentWeather.weather[0].icon}
       />
     );
   });
