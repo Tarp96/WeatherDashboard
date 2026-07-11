@@ -1,4 +1,3 @@
-import { getFavoriteCities } from "../../utils/helpers/Favorites";
 import { useQueries } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
 import { FavoriteCityCard } from "./FavoriteCityCard";
