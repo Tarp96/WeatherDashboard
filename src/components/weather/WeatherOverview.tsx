@@ -14,7 +14,7 @@ import { ErrorMessageCard } from "../state/ErrorMessageCard";
 import { WeatherOverviewSkeleton } from "../state/WeatherOverviewSkeleton";
 import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Star } from "lucide-react";
 
 type WeatherOverviewProps = {
@@ -24,6 +24,7 @@ type WeatherOverviewProps = {
   geo: { lat: number; lon: number } | null;
   isFeaturedCity: boolean;
   onAddFavorite: (city: string) => void;
+  onRemoveFavorite: (city: string) => void;
   favoriteCities: string[];
 };
 
@@ -34,9 +35,10 @@ export const WeatherOverview = ({
   geo,
   isFeaturedCity,
   onAddFavorite,
+  onRemoveFavorite,
   favoriteCities,
 }: WeatherOverviewProps) => {
-  const isFavorites = favoriteCities.includes(city);
+  const isFavorite = favoriteCities.includes(city);
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
@@ -104,12 +106,22 @@ export const WeatherOverview = ({
 
         <button
           type="button"
-          onClick={() => onAddFavorite(city)}
-          disabled={isFavorites}
-          className="flex cursor-pointer items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
+          onClick={() =>
+            isFavorite ? onRemoveFavorite(city) : onAddFavorite(city)
+          }
+          className={`flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium transition ${
+            isFavorite
+              ? "border-slate-300 bg-white text-slate-600 hover:border-red-300 hover:bg-red-50 hover:text-red-600"
+              : "border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
+          }`}
         >
-          <Star className="h-4 w-4" />
-          Add to Favorites
+          <Star
+            className={`h-4 w-4 ${
+              isFavorite ? "fill-amber-400 text-amber-400" : ""
+            }`}
+          />
+
+          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
         </button>
       </div>
 

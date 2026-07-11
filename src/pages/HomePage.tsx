@@ -130,6 +130,7 @@ export const HomePage = () => {
             geo={geo}
             isFeaturedCity={locationMode === "featured"}
             onAddFavorite={handleAddToFavorites}
+            onRemoveFavorite={handleRemoveFromFavorites}
             favoriteCities={favoriteCities}
           />
         </main>
