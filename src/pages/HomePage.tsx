@@ -6,6 +6,7 @@ import { FavoritesBar } from "../components/favorites/FavoritesBar";
 import {
   getFavoriteCities,
   addCityToFavorites,
+  removeCityFromFavorites,
 } from "../utils/helpers/Favorites";
 
 type LocationMode = "featured" | "search" | "current";
@@ -64,6 +65,11 @@ export const HomePage = () => {
     setFavoriteCities(getFavoriteCities());
   };
 
+  const handleRemoveFromFavorites = (city: string) => {
+    removeCityFromFavorites(city);
+    setFavoriteCities(getFavoriteCities());
+  };
+
   const handleSearch = (city: string) => {
     setSelectedCity(city);
     setUseCurrentLocation(false);
@@ -113,7 +119,10 @@ export const HomePage = () => {
         />
 
         <main className="flex-1">
-          <FavoritesBar favoriteCityList={favoriteCities} />
+          <FavoritesBar
+            favoriteCityList={favoriteCities}
+            onRemoveFavorite={handleRemoveFromFavorites}
+          />
           <WeatherOverview
             city={selectedCity}
             useCurrentLocation={useCurrentLocation}

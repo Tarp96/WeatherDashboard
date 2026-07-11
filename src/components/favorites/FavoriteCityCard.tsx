@@ -6,6 +6,7 @@ type FavoriteCityCardProps = {
   temp: number;
   feelsLike: number;
   icon: string;
+  onRemoveFavorite: (city: string) => void;
 };
 
 export const FavoriteCityCard = ({
@@ -14,6 +15,7 @@ export const FavoriteCityCard = ({
   temp,
   feelsLike,
   icon,
+  onRemoveFavorite,
 }: FavoriteCityCardProps) => {
   return (
     <article className="relative flex w-64 items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg">
@@ -64,6 +66,7 @@ focus:ring-2
 focus:ring-amber-400
 focus:ring-offset-2
 "
+        onClick={() => onRemoveFavorite(city)}
       >
         <Star className="h-5 w-5 fill-current" />
       </button>

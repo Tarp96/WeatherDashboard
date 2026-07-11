@@ -4,9 +4,13 @@ import { FavoriteCityCard } from "./FavoriteCityCard";
 
 type FavoritesBarProps = {
   favoriteCityList: string[];
+  onRemoveFavorite: (city: string) => void;
 };
 
-export const FavoritesBar = ({ favoriteCityList }: FavoritesBarProps) => {
+export const FavoritesBar = ({
+  favoriteCityList,
+  onRemoveFavorite,
+}: FavoritesBarProps) => {
   const favoriteQueries = useQueries({
     queries: favoriteCityList.map((city) => ({
       queryKey: ["favorite", city],
@@ -43,6 +47,7 @@ export const FavoritesBar = ({ favoriteCityList }: FavoritesBarProps) => {
         temp={currentWeather.temp}
         feelsLike={currentWeather.feels_like}
         icon={currentWeather.weather[0].icon}
+        onRemoveFavorite={onRemoveFavorite}
       />
     );
   });
