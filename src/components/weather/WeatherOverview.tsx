@@ -16,7 +16,6 @@ import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
 import { useEffect } from "react";
 import { Star } from "lucide-react";
-import { addCityToFavorites } from "../../utils/helpers/Favorites";
 
 type WeatherOverviewProps = {
   city: string;
@@ -24,6 +23,7 @@ type WeatherOverviewProps = {
   onSearchingChange: (loading: boolean) => void;
   geo: { lat: number; lon: number } | null;
   isFeaturedCity: boolean;
+  onAddFavorite: (city: string) => void;
 };
 
 export const WeatherOverview = ({
@@ -32,6 +32,7 @@ export const WeatherOverview = ({
   onSearchingChange,
   geo,
   isFeaturedCity,
+  onAddFavorite,
 }: WeatherOverviewProps) => {
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
@@ -99,7 +100,7 @@ export const WeatherOverview = ({
 
         <button
           type="button"
-          onClick={() => addCityToFavorites(city)}
+          onClick={() => onAddFavorite(city)}
           className="flex cursor-pointer items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
         >
           <Star className="h-4 w-4" />

@@ -3,6 +3,10 @@ import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { useState, useEffect } from "react";
 import { FavoritesBar } from "../components/favorites/FavoritesBar";
+import {
+  getFavoriteCities,
+  addCityToFavorites,
+} from "../utils/helpers/Favorites";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -12,6 +16,9 @@ export const HomePage = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
   const [locationMode, setLocationMode] = useState<LocationMode>("featured");
+  const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
+    getFavoriteCities(),
+  );
 
   const fallbackCities = [
     "Oslo",
@@ -51,6 +58,11 @@ export const HomePage = () => {
     setSelectedCity(getRandomFallbackCity());
     setLocationMode("featured");
   }, []);
+
+  const handleAddToFavorites = (city: string) => {
+    addCityToFavorites(city);
+    setFavoriteCities(getFavoriteCities());
+  };
 
   const handleSearch = (city: string) => {
     setSelectedCity(city);
@@ -108,6 +120,7 @@ export const HomePage = () => {
             onSearchingChange={setIsSearching}
             geo={geo}
             isFeaturedCity={locationMode === "featured"}
+            onAddFavorite={handleAddToFavorites}
           />
         </main>
 
