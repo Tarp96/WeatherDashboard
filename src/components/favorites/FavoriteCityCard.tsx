@@ -22,6 +22,12 @@ export const FavoriteCityCard = ({
   return (
     <article
       onClick={() => onDisplayCity(city)}
+      onKeyDown={(event) => {
+        if (event.key === "Enter" || event.key === " ") {
+          event.preventDefault();
+          onDisplayCity(city);
+        }
+      }}
       className="relative flex w-64 items-center justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-md transition hover:-translate-y-1 hover:shadow-lg"
     >
       <div className="flex flex-col">
@@ -71,7 +77,10 @@ focus:ring-2
 focus:ring-amber-400
 focus:ring-offset-2
 "
-        onClick={() => onRemoveFavorite(city)}
+        onClick={(event) => {
+          event.stopPropagation();
+          onRemoveFavorite(city);
+        }}
       >
         <Star className="h-5 w-5 fill-current" />
       </button>
