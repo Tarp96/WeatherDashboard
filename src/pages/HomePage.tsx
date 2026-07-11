@@ -113,7 +113,7 @@ export const HomePage = () => {
         />
 
         <main className="flex-1">
-          <FavoritesBar />
+          <FavoritesBar favoriteCityList={favoriteCities} />
           <WeatherOverview
             city={selectedCity}
             useCurrentLocation={useCurrentLocation}
