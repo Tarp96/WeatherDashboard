@@ -62,6 +62,8 @@ export const HomePage = () => {
 
   const handleCityToDisplay = (city: string) => {
     setSelectedCity(city);
+    setUseCurrentLocation(false);
+    setLocationMode("search");
   };
 
   const handleAddToFavorites = (city: string) => {
