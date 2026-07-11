@@ -11,8 +11,49 @@ import {
 
 type LocationMode = "featured" | "search" | "current";
 
+const fallbackCities = [
+  "Oslo",
+  "London",
+  "Paris",
+  "Rome",
+  "Berlin",
+
+  "New York",
+  "Toronto",
+  "Mexico City",
+  "Vancouver",
+
+  "Rio de Janeiro",
+  "Buenos Aires",
+  "Lima",
+
+  "Cape Town",
+  "Cairo",
+  "Nairobi",
+
+  "Tokyo",
+  "Seoul",
+  "Bangkok",
+  "Singapore",
+
+  "Sydney",
+  "Auckland",
+
+  "Dubai",
+  "Doha",
+  "Reykjavik",
+  "Honolulu",
+];
+
+const getRandomFallbackCity = () => {
+  const randomIndex = Math.floor(Math.random() * fallbackCities.length);
+  return fallbackCities[randomIndex];
+};
+
 export const HomePage = () => {
-  const [selectedCity, setSelectedCity] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>(() =>
+    getRandomFallbackCity(),
+  );
   const [useCurrentLocation, setUseCurrentLocation] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
   const [geo, setGeo] = useState<{ lat: number; lon: number } | null>(null);
@@ -20,40 +61,6 @@ export const HomePage = () => {
   const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
     getFavoriteCities(),
   );
-
-  const fallbackCities = [
-    "Oslo",
-    "London",
-    "Paris",
-    "Rome",
-    "Berlin",
-
-    "New York",
-    "Toronto",
-    "Mexico City",
-    "Vancouver",
-
-    "Rio de Janeiro",
-    "Buenos Aires",
-    "Lima",
-
-    "Cape Town",
-    "Cairo",
-    "Nairobi",
-
-    "Tokyo",
-    "Seoul",
-    "Bangkok",
-    "Singapore",
-
-    "Sydney",
-    "Auckland",
-
-    "Dubai",
-    "Doha",
-    "Reykjavik",
-    "Honolulu",
-  ];
 
   useEffect(() => {
     setSelectedCity(getRandomFallbackCity());
@@ -104,40 +111,33 @@ export const HomePage = () => {
     );
   };
 
-  const getRandomFallbackCity = () => {
-    const randomIndex = Math.floor(Math.random() * fallbackCities.length);
-    return fallbackCities[randomIndex];
-  };
-
   return (
-    <>
-      <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
-        <Header
-          onSearch={handleSelectCity}
-          isSearching={isSearching}
-          onUseCurrentLocation={handleUseCurrentLocation}
+    <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
+      <Header
+        onSearch={handleSelectCity}
+        isSearching={isSearching}
+        onUseCurrentLocation={handleUseCurrentLocation}
+      />
+
+      <main className="flex-1">
+        <FavoritesBar
+          favoriteCityList={favoriteCities}
+          onRemoveFavorite={handleRemoveFromFavorites}
+          onDisplayCity={handleSelectCity}
         />
+        <WeatherOverview
+          city={selectedCity}
+          useCurrentLocation={useCurrentLocation}
+          onSearchingChange={setIsSearching}
+          geo={geo}
+          isFeaturedCity={locationMode === "featured"}
+          onAddFavorite={handleAddToFavorites}
+          onRemoveFavorite={handleRemoveFromFavorites}
+          favoriteCities={favoriteCities}
+        />
+      </main>
 
-        <main className="flex-1">
-          <FavoritesBar
-            favoriteCityList={favoriteCities}
-            onRemoveFavorite={handleRemoveFromFavorites}
-            onDisplayCity={handleSelectCity}
-          />
-          <WeatherOverview
-            city={selectedCity}
-            useCurrentLocation={useCurrentLocation}
-            onSearchingChange={setIsSearching}
-            geo={geo}
-            isFeaturedCity={locationMode === "featured"}
-            onAddFavorite={handleAddToFavorites}
-            onRemoveFavorite={handleRemoveFromFavorites}
-            favoriteCities={favoriteCities}
-          />
-        </main>
-
-        <Footer />
-      </div>
-    </>
+      <Footer />
+    </div>
   );
 };
