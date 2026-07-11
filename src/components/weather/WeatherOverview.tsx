@@ -16,7 +16,7 @@ import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
 import { useEffect } from "react";
 import { Star } from "lucide-react";
-import { setItem } from "../../utils/helpers/LocalStorage";
+import { addCityToFavorites } from "../../utils/helpers/Favorites";
 
 type WeatherOverviewProps = {
   city: string;
@@ -99,7 +99,7 @@ export const WeatherOverview = ({
 
         <button
           type="button"
-          onClick={() => setItem("cityName", city)}
+          onClick={() => addCityToFavorites(city)}
           className="flex cursor-pointer items-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2 text-sm font-medium text-amber-700 transition hover:bg-amber-100"
         >
           <Star className="h-4 w-4" />
