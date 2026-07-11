@@ -2,6 +2,7 @@ import { WeatherOverview } from "../components/weather/WeatherOverview";
 import { Header } from "../components/layout/Header";
 import { Footer } from "../components/layout/Footer";
 import { useState, useEffect } from "react";
+import { FavoritesBar } from "../components/favorites/FavoritesBar";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -100,6 +101,7 @@ export const HomePage = () => {
         />
 
         <main className="flex-1">
+          <FavoritesBar />
           <WeatherOverview
             city={selectedCity}
             useCurrentLocation={useCurrentLocation}

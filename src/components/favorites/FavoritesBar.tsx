@@ -3,7 +3,7 @@ import { useQueries } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
 import { FavoriteCityCard } from "./FavoriteCityCard";
 
-export const FavoritesBars = () => {
+export const FavoritesBar = () => {
   const favoriteCityList = getFavoriteCities();
 
   const favoriteQueries = useQueries({
