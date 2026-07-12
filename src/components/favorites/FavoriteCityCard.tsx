@@ -32,7 +32,7 @@ export const FavoriteCityCard = ({
           onDisplayCity(city);
         }
       }}
-      className={`relative flex w-64 items-center justify-between rounded-2xl border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${
+      className={`relative flex w-64 items-center justify-between rounded-2xl border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-pointer ${
         isHighlighted
           ? "border-blue-500 ring-2 ring-blue-200 shadow-xl"
           : "border-slate-200 shadow-md"
