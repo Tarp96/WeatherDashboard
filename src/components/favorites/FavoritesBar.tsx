@@ -17,10 +17,12 @@ export const FavoritesBar = ({
   selectedCity,
 }: FavoritesBarProps) => {
   const favoriteQueries = useQueries({
-    queries: favoriteCityList.map((city) => ({
-      queryKey: ["favorite", city],
-      queryFn: () => getWeatherDataWithCoordinates(city),
-    })),
+    queries: [...favoriteCityList]
+      .sort((a, b) => a.localeCompare(b))
+      .map((city) => ({
+        queryKey: ["favorite", city],
+        queryFn: () => getWeatherDataWithCoordinates(city),
+      })),
   });
 
   if (favoriteCityList.length === 0) {
