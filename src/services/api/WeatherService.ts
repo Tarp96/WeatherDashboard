@@ -1,5 +1,9 @@
 import { CityNotFoundError } from "../../components/errors/CityNotFoundError";
-import { WeatherApiResponse, CityWeatherData } from "../../types/Weather";
+import {
+  WeatherApiResponse,
+  CityWeatherData,
+  AirPollutionResponse,
+} from "../../types/Weather";
 
 export const getWeatherData = async (
   lat: number,
@@ -110,7 +114,10 @@ export const getFiveDayForecastByCoordinates = async (
   return fetchFiveDayForecast(lat, lon);
 };
 
-export const getAirPollutionData = async (lat: number, lon: number) => {
+export const getAirPollutionData = async (
+  lat: number,
+  lon: number,
+): Promise<AirPollutionResponse> => {
   const response = await fetch(
     `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`,
   );
