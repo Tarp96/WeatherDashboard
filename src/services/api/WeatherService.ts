@@ -109,3 +109,15 @@ export const getFiveDayForecastByCoordinates = async (
 ) => {
   return fetchFiveDayForecast(lat, lon);
 };
+
+export const getAirPollutionData = async (lat: number, lon: number) => {
+  const response = await fetch(
+    `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}`,
+  );
+
+  if (!response.ok) {
+    throw new Error("Failed to fetch Air pollution data");
+  }
+
+  return response.json();
+};
