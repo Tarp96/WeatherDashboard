@@ -114,7 +114,7 @@ export const getFiveDayForecastByCoordinates = async (
   return fetchFiveDayForecast(lat, lon);
 };
 
-export const getAirPollutionData = async (
+export const fetchAirPollutionData = async (
   lat: number,
   lon: number,
 ): Promise<AirPollutionResponse> => {
@@ -127,4 +127,16 @@ export const getAirPollutionData = async (
   }
 
   return response.json();
+};
+
+export const getAirPollutionData = async (city: string) => {
+  const geoData = await getCoordinatesByCity(city);
+
+  if (!geoData.length) {
+    throw new CityNotFoundError(city);
+  }
+
+  const { lat, lon } = geoData[0];
+
+  return fetchAirPollutionData(lat, lon);
 };
