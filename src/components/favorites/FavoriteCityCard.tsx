@@ -1,4 +1,5 @@
 import { Star, MapPin } from "lucide-react";
+import { motion } from "motion/react";
 
 type FavoriteCityCardProps = {
   city: string;
@@ -24,7 +25,7 @@ export const FavoriteCityCard = ({
   const isHighlighted = city === selectedCity;
 
   return (
-    <article
+    <motion.article
       onClick={() => onDisplayCity(city)}
       onKeyDown={(event) => {
         if (event.key === "Enter" || event.key === " ") {
@@ -82,6 +83,6 @@ export const FavoriteCityCard = ({
       >
         <Star className="h-5 w-5 fill-current" />
       </button>
-    </article>
+    </motion.article>
   );
 };

@@ -2,6 +2,7 @@ import { useQueries } from "@tanstack/react-query";
 import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService";
 import { FavoriteCityCard } from "./FavoriteCityCard";
 import { Star } from "lucide-react";
+import { AnimatePresence } from "motion/react";
 
 type FavoritesBarProps = {
   favoriteCityList: string[];
@@ -91,7 +92,7 @@ export const FavoritesBar = ({
       </h2>
 
       <div className="flex gap-4 overflow-x-auto px-1 pt-2 pb-3">
-        {displayFavorites}
+        <AnimatePresence mode="popLayout">{displayFavorites}</AnimatePresence>
       </div>
     </section>
   );
