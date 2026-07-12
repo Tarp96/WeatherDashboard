@@ -8,6 +8,7 @@ import {
   addCityToFavorites,
   removeCityFromFavorites,
 } from "../utils/helpers/Favorites";
+import { AnimatePresence, motion } from "framer-motion";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -126,16 +127,30 @@ export const HomePage = () => {
           onDisplayCity={handleSelectCity}
           selectedCity={selectedCity}
         />
-        <WeatherOverview
-          city={selectedCity}
-          useCurrentLocation={useCurrentLocation}
-          onSearchingChange={setIsSearching}
-          geo={geo}
-          isFeaturedCity={locationMode === "featured"}
-          onAddFavorite={handleAddToFavorites}
-          onRemoveFavorite={handleRemoveFromFavorites}
-          favoriteCities={favoriteCities}
-        />
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={
+              useCurrentLocation && geo
+                ? `current-${geo.lat}-${geo.lon}`
+                : selectedCity
+            }
+            initial={{ opacity: 0, y: -16 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 12 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+          >
+            <WeatherOverview
+              city={selectedCity}
+              useCurrentLocation={useCurrentLocation}
+              onSearchingChange={setIsSearching}
+              geo={geo}
+              isFeaturedCity={locationMode === "featured"}
+              onAddFavorite={handleAddToFavorites}
+              onRemoveFavorite={handleRemoveFromFavorites}
+              favoriteCities={favoriteCities}
+            />
+          </motion.div>
+        </AnimatePresence>
       </main>
 
       <Footer />
