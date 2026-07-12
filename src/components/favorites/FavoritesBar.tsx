@@ -85,7 +85,7 @@ export const FavoritesBar = ({
   return (
     <section className="mx-auto mt-6 max-w-7xl px-6">
       <h2 className="mb-4 text-xl font-semibold text-slate-800">
-        Favorite Cities
+        Favorite Cities ({favoriteCityList.length})
       </h2>
 
       <div className="flex gap-4 overflow-x-auto pb-2">{displayFavorites}</div>
