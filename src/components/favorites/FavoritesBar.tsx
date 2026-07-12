@@ -90,7 +90,9 @@ export const FavoritesBar = ({
         Favorite Cities ({favoriteCityList.length})
       </h2>
 
-      <div className="flex gap-4 overflow-x-auto pb-2">{displayFavorites}</div>
+      <div className="flex gap-4 overflow-x-auto px-1 pt-2 pb-3">
+        {displayFavorites}
+      </div>
     </section>
   );
 };
