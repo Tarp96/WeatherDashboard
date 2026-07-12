@@ -124,6 +124,7 @@ export const HomePage = () => {
           favoriteCityList={favoriteCities}
           onRemoveFavorite={handleRemoveFromFavorites}
           onDisplayCity={handleSelectCity}
+          selectedCity={selectedCity}
         />
         <WeatherOverview
           city={selectedCity}
