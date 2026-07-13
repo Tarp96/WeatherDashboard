@@ -1,4 +1,5 @@
 import type { LucideIcon } from "lucide-react";
+import { ReactNode } from "react";
 
 type WeatherInfoCardSize = "default" | "compact";
 type WeatherInfoCardVariant = "dark" | "light";
@@ -6,7 +7,7 @@ type WeatherInfoCardVariant = "dark" | "light";
 type WeatherInfoCardProps = {
   icon: LucideIcon;
   label: string;
-  value: string | number;
+  value: ReactNode;
   size?: WeatherInfoCardSize;
   variant?: WeatherInfoCardVariant;
 };

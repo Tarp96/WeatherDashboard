@@ -3,6 +3,7 @@ import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
 import { Gauge, Sun, Sunrise, Sunset, Thermometer, Fan } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 import { DashboardCard } from "../ui/DashboardCard";
+import { airQualityMap } from "../../utils/helpers/AirQualityMap";
 
 interface WeatherDetailsProps {
   data: CityWeatherData;
@@ -15,15 +16,7 @@ export const WeatherDetails = ({
 }: WeatherDetailsProps) => {
   const weatherData = data?.weather;
   const detailsData = weatherData?.data[0];
-  const airQuality = airPollutionData.list[0].main.aqi;
-
-  const aqiLabels = {
-    1: "Good",
-    2: "Fair",
-    3: "Moderate",
-    4: "Poor",
-    5: "Very Poor",
-  } as const;
+  const airQuality = airQualityMap[airPollutionData.list[0].main.aqi];
 
   return (
     <DashboardCard>
@@ -54,7 +47,12 @@ export const WeatherDetails = ({
 
           <WeatherInfoCard
             icon={Fan}
-            value={aqiLabels[airQuality]}
+            value={
+              <div className="flex items-center gap-2">
+                <span className={`h-3 w-3 rounded-full ${airQuality.color}`} />
+                <span>{airQuality.label}</span>
+              </div>
+            }
             label="Air Quality"
             size="compact"
             variant="light"
