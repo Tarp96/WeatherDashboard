@@ -1,14 +1,16 @@
-export const getWindDirection = (degrees: number) => {
+export const getWindDirection = (degrees: number): string => {
   const directions = [
-    { label: "North", arrow: "↑" },
-    { label: "North-East", arrow: "↗" },
-    { label: "East", arrow: "→" },
-    { label: "South-East", arrow: "↘" },
-    { label: "South", arrow: "↓" },
-    { label: "South-West", arrow: "↙" },
-    { label: "West", arrow: "←" },
-    { label: "North-West", arrow: "↖" },
+    "North",
+    "North-East",
+    "East",
+    "South-East",
+    "South",
+    "South-West",
+    "West",
+    "North-West",
   ];
 
-  return directions[Math.round(degrees / 45) % 8];
+  const index = Math.round(degrees / 45) % 8;
+
+  return directions[index];
 };

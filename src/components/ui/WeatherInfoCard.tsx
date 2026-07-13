@@ -34,7 +34,7 @@ export const WeatherInfoCard = ({
     >
       <Icon
         style={iconStyle}
-        className={`flex-shrink-0 ${
+        className={`flex-shrink-0 transition-transform duration-500 ${
           isLight
             ? isCompact
               ? "h-7 w-7 text-blue-600"

@@ -18,7 +18,8 @@ export const WeatherDetails = ({
   const weatherData = data?.weather;
   const detailsData = weatherData?.data[0];
   const airQuality = airQualityMap[airPollutionData.list[0].main.aqi];
-  const windDirection = getWindDirection(data.weather.data[0].wind_deg);
+  const windDegrees = data.weather.data[0].wind_deg;
+  const windDirection = getWindDirection(windDegrees);
 
   return (
     <DashboardCard>
@@ -70,12 +71,12 @@ export const WeatherDetails = ({
 
           <WeatherInfoCard
             icon={Navigation}
-            value={`${windDirection.arrow} ${windDirection.label}`}
             label="Wind Direction"
+            value={windDirection}
             size="compact"
             variant="light"
             iconStyle={{
-              transform: `rotate(${data.weather.data[0].wind_deg}deg)`,
+              transform: `rotate(${windDegrees}deg)`,
             }}
           />
 
