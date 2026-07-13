@@ -26,8 +26,8 @@ export const WeatherInfoCard = ({
     <div
       className={`flex items-center gap-4 rounded-xl border ${
         isLight
-          ? "bg-white border-gray-200 shadow-sm"
-          : "bg-white/10 border-white/20"
+          ? "border-gray-200 bg-white shadow-sm"
+          : "border-white/20 bg-white/10"
       } ${isCompact ? "p-3" : "p-4"}`}
     >
       <Icon
@@ -50,13 +50,14 @@ export const WeatherInfoCard = ({
         >
           {label}
         </p>
-        <p
+
+        <div
           className={`mt-0.5 font-semibold ${
             isLight ? "text-gray-900" : "text-white"
           } ${isCompact ? "text-xl" : "text-2xl"}`}
         >
           {value}
-        </p>
+        </div>
       </div>
     </div>
   );
