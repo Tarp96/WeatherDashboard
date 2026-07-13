@@ -1,16 +1,29 @@
-import { CityWeatherData } from "../../types/Weather";
+import { AirPollutionResponse, CityWeatherData } from "../../types/Weather";
 import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
-import { Gauge, Sun, Sunrise, Sunset, Thermometer, Wind } from "lucide-react";
+import { Gauge, Sun, Sunrise, Sunset, Thermometer, Fan } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 import { DashboardCard } from "../ui/DashboardCard";
 
 interface WeatherDetailsProps {
   data: CityWeatherData;
+  airPollutionData: AirPollutionResponse;
 }
 
-export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
+export const WeatherDetails = ({
+  data,
+  airPollutionData,
+}: WeatherDetailsProps) => {
   const weatherData = data?.weather;
   const detailsData = weatherData?.data[0];
+  const airQuality = airPollutionData.list[0].main.aqi;
+
+  const aqiLabels = {
+    1: "Good",
+    2: "Fair",
+    3: "Moderate",
+    4: "Poor",
+    5: "Very Poor",
+  } as const;
 
   return (
     <DashboardCard>
@@ -40,9 +53,9 @@ export const WeatherDetails = ({ data }: WeatherDetailsProps) => {
           />
 
           <WeatherInfoCard
-            icon={Wind}
-            value={`${detailsData?.wind_speed ?? 0} m/s`}
-            label="Wind Speed"
+            icon={Fan}
+            value={aqiLabels[airQuality]}
+            label="Air Quality"
             size="compact"
             variant="light"
           />

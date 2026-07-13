@@ -2,12 +2,17 @@ import { CityWeatherDisplay } from "./CityWeatherDisplay";
 import { TodaysTemperature } from "./TodaysTemperature";
 import { WeatherDetails } from "./WeatherDetails";
 import { useQuery } from "@tanstack/react-query";
-import { CityWeatherData, FiveDayForecastResponse } from "../../types/Weather";
+import {
+  CityWeatherData,
+  FiveDayForecastResponse,
+  AirPollutionResponse,
+} from "../../types/Weather";
 import {
   getFiveDayForecastData,
   getWeatherDataWithCoordinates,
   getFiveDayForecastByCoordinates,
   getWeatherDataByCoordinates,
+  getAirPollutionData,
 } from "../../services/api/WeatherService";
 import { FiveDayForecastContainer } from "./FiveDayForecastContainer";
 import { ErrorMessageCard } from "../state/ErrorMessageCard";
@@ -39,6 +44,11 @@ export const WeatherOverview = ({
   favoriteCities,
 }: WeatherOverviewProps) => {
   const isFavorite = favoriteCities.includes(city);
+
+  const airPollutionQuery = useQuery<AirPollutionResponse>({
+    queryKey: ["airPollution", city],
+    queryFn: () => getAirPollutionData(city),
+  });
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
@@ -83,11 +93,19 @@ export const WeatherOverview = ({
     return <NoResultCard queryString={city} />;
   }
 
-  if (currentWeatherQuery.error || forecastQuery.error) {
+  if (
+    currentWeatherQuery.error ||
+    forecastQuery.error ||
+    airPollutionQuery.error
+  ) {
     return <ErrorMessageCard />;
   }
 
-  if (!currentWeatherQuery.data || !forecastQuery.data) {
+  if (
+    !currentWeatherQuery.data ||
+    !forecastQuery.data ||
+    !airPollutionQuery.data
+  ) {
     return null;
   }
 
@@ -130,7 +148,10 @@ export const WeatherOverview = ({
           data={currentWeatherQuery.data}
           isFeaturedCity={isFeaturedCity}
         />
-        <WeatherDetails data={currentWeatherQuery.data} />
+        <WeatherDetails
+          data={currentWeatherQuery.data}
+          airPollutionData={airPollutionQuery.data}
+        />
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[3fr_2fr]">
