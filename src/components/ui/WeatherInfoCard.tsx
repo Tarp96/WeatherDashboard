@@ -10,6 +10,7 @@ type WeatherInfoCardProps = {
   value: ReactNode;
   size?: WeatherInfoCardSize;
   variant?: WeatherInfoCardVariant;
+  iconStyle?: React.CSSProperties;
 };
 
 export const WeatherInfoCard = ({
@@ -18,6 +19,7 @@ export const WeatherInfoCard = ({
   value,
   size = "default",
   variant = "dark",
+  iconStyle,
 }: WeatherInfoCardProps) => {
   const isCompact = size === "compact";
   const isLight = variant === "light";
@@ -31,6 +33,7 @@ export const WeatherInfoCard = ({
       } ${isCompact ? "p-3" : "p-4"}`}
     >
       <Icon
+        style={iconStyle}
         className={`flex-shrink-0 ${
           isLight
             ? isCompact

@@ -1,9 +1,10 @@
 import { AirPollutionResponse, CityWeatherData } from "../../types/Weather";
 import { timeStampConverter } from "../../utils/helpers/TimeStampConverter";
-import { Gauge, Sun, Sunrise, Sunset, Thermometer, Fan } from "lucide-react";
+import { Gauge, Sun, Sunrise, Sunset, Fan, Navigation } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 import { DashboardCard } from "../ui/DashboardCard";
 import { airQualityMap } from "../../utils/helpers/AirQualityMap";
+import { getWindDirection } from "./../../utils/helpers/GetWindDirection";
 
 interface WeatherDetailsProps {
   data: CityWeatherData;
@@ -17,6 +18,7 @@ export const WeatherDetails = ({
   const weatherData = data?.weather;
   const detailsData = weatherData?.data[0];
   const airQuality = airQualityMap[airPollutionData.list[0].main.aqi];
+  const windDirection = getWindDirection(data.weather.data[0].wind_deg);
 
   return (
     <DashboardCard>
@@ -67,11 +69,14 @@ export const WeatherDetails = ({
           />
 
           <WeatherInfoCard
-            icon={Thermometer}
-            value={`${detailsData?.feels_like}°C`}
-            label="Feels like"
+            icon={Navigation}
+            value={`${windDirection.arrow} ${windDirection.label}`}
+            label="Wind Direction"
             size="compact"
             variant="light"
+            iconStyle={{
+              transform: `rotate(${data.weather.data[0].wind_deg}deg)`,
+            }}
           />
 
           <WeatherInfoCard
