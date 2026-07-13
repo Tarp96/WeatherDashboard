@@ -62,6 +62,9 @@ export const HomePage = () => {
   const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
     getFavoriteCities(),
   );
+  const [weatherBackground, setWeatherBackground] = useState(
+    "from-sky-50 to-blue-100",
+  );
 
   useEffect(() => {
     setSelectedCity(getRandomFallbackCity());
@@ -113,7 +116,9 @@ export const HomePage = () => {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-gradient-to-r from-sky-50 to-blue-100">
+    <div
+      className={`flex min-h-screen flex-col bg-gradient-to-br transition-colors duration-700 ${weatherBackground}`}
+    >
       <Header
         onSearch={handleSelectCity}
         isSearching={isSearching}
@@ -148,6 +153,7 @@ export const HomePage = () => {
               onAddFavorite={handleAddToFavorites}
               onRemoveFavorite={handleRemoveFromFavorites}
               favoriteCities={favoriteCities}
+              onBackgroundChange={setWeatherBackground}
             />
           </motion.div>
         </AnimatePresence>
