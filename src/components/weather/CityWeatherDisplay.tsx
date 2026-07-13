@@ -2,6 +2,7 @@ import { CityWeatherData } from "../../types/Weather";
 import { Droplets, Wind } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 import { DashboardCard } from "../ui/DashboardCard";
+import { AnimatedWeatherIcon } from "../ui/AnimatedWeatherIcon";
 
 interface CityWeatherDisplayProps {
   data: CityWeatherData;
@@ -61,10 +62,11 @@ export const CityWeatherDisplay = ({
         </div>
       </div>
       <div className="flex flex-col items-center justify-center rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm">
-        <img
-          src={`https://openweathermap.org/img/wn/${currentConditions.weather[0].icon}@2x.png`}
-          alt={weatherDescription.description}
-          className="h-32 w-32"
+        <AnimatedWeatherIcon
+          iconCode={weatherDescription.icon}
+          weatherId={weatherDescription.id}
+          description={weatherDescription.description}
+          className="h-32 w-32 object-contain"
         />
 
         <p className="mt-2 text-xl font-semibold capitalize">
