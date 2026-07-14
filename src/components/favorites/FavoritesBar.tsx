@@ -9,6 +9,7 @@ type FavoritesBarProps = {
   onRemoveFavorite: (city: string) => void;
   onDisplayCity: (city: string) => void;
   selectedCity: string;
+  headingTextClass: string;
 };
 
 export const FavoritesBar = ({
@@ -16,6 +17,7 @@ export const FavoritesBar = ({
   onRemoveFavorite,
   onDisplayCity,
   selectedCity,
+  headingTextClass,
 }: FavoritesBarProps) => {
   const favoriteQueries = useQueries({
     queries: [...favoriteCityList]
@@ -87,7 +89,7 @@ export const FavoritesBar = ({
 
   return (
     <section className="mx-auto mt-6 max-w-7xl px-6">
-      <h2 className="mb-4 text-xl font-semibold text-slate-800">
+      <h2 className={`text-xl font-semibold ${headingTextClass}`}>
         Favorite Cities ({favoriteCityList.length})
       </h2>
 

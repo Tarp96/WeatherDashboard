@@ -9,6 +9,7 @@ import {
   removeCityFromFavorites,
 } from "../utils/helpers/CityStorage";
 import { AnimatePresence, motion } from "framer-motion";
+import { WeatherTheme } from "../utils/helpers/GetWeatherBackground";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -62,9 +63,15 @@ export const HomePage = () => {
   const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
     getFavoriteCities(),
   );
-  const [weatherBackground, setWeatherBackground] = useState(
-    "from-sky-50 to-blue-100",
-  );
+
+  const defaultTheme: WeatherTheme = {
+    background: "from-sky-50 to-blue-100",
+    headingText: "text-slate-800",
+    secondaryText: "text-slate-500",
+    footerBackground: "bg-white/30",
+    footerText: "text-slate-600",
+  };
+  const [weatherTheme, setWeatherTheme] = useState<WeatherTheme>(defaultTheme);
 
   useEffect(() => {
     setSelectedCity(getRandomFallbackCity());
@@ -117,7 +124,7 @@ export const HomePage = () => {
 
   return (
     <div
-      className={`flex min-h-screen flex-col bg-gradient-to-br transition-colors duration-700 ${weatherBackground}`}
+      className={`flex min-h-screen flex-col bg-gradient-to-br transition-colors duration-700 ${weatherTheme.background}`}
     >
       <Header
         onSearch={handleSelectCity}
@@ -131,6 +138,7 @@ export const HomePage = () => {
           onRemoveFavorite={handleRemoveFromFavorites}
           onDisplayCity={handleSelectCity}
           selectedCity={selectedCity}
+          headingTextClass={weatherTheme.headingText}
         />
         <AnimatePresence mode="wait">
           <motion.div
@@ -153,7 +161,8 @@ export const HomePage = () => {
               onAddFavorite={handleAddToFavorites}
               onRemoveFavorite={handleRemoveFromFavorites}
               favoriteCities={favoriteCities}
-              onBackgroundChange={setWeatherBackground}
+              onThemeChange={setWeatherTheme}
+              weatherTheme={weatherTheme}
             />
           </motion.div>
         </AnimatePresence>

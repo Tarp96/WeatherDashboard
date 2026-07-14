@@ -21,7 +21,8 @@ import { NoResultCard } from "../state/NoResultCard";
 import { CityNotFoundError } from "../errors/CityNotFoundError";
 import { useEffect } from "react";
 import { Star } from "lucide-react";
-import { getWeatherBackground } from "../../utils/helpers/GetWeatherBackground";
+import type { WeatherTheme } from "../../utils/helpers/GetWeatherBackground";
+import { getWeatherTheme } from "../../utils/helpers/GetWeatherBackground";
 
 type WeatherOverviewProps = {
   city: string;
@@ -32,7 +33,8 @@ type WeatherOverviewProps = {
   onAddFavorite: (city: string) => void;
   onRemoveFavorite: (city: string) => void;
   favoriteCities: string[];
-  onBackgroundChange: (background: string) => void;
+  onThemeChange: (theme: WeatherTheme) => void;
+  weatherTheme: WeatherTheme;
 };
 
 export const WeatherOverview = ({
@@ -44,7 +46,8 @@ export const WeatherOverview = ({
   onAddFavorite,
   onRemoveFavorite,
   favoriteCities,
-  onBackgroundChange,
+  onThemeChange,
+  weatherTheme,
 }: WeatherOverviewProps) => {
   const isFavorite = favoriteCities.includes(city);
 
@@ -88,19 +91,15 @@ export const WeatherOverview = ({
   useEffect(() => {
     if (!currentWeatherQuery.data) return;
 
-    const currentWeather = currentWeatherQuery.data?.weather.data[0];
+    const { weather, dt, sunrise, sunset } =
+      currentWeatherQuery.data.weather.data[0];
 
-    const isNight =
-      currentWeather.dt < currentWeather.sunrise ||
-      currentWeather.dt > currentWeather.sunset;
+    const isNight = dt < sunrise || dt > sunset;
 
-    const background = getWeatherBackground(
-      currentWeather.weather[0].id,
-      isNight,
-    );
+    const weatherTheme = getWeatherTheme(weather[0].id, isNight);
 
-    onBackgroundChange(background);
-  }, [currentWeatherQuery.data, onBackgroundChange]);
+    onThemeChange(weatherTheme);
+  }, [currentWeatherQuery.data, onThemeChange]);
 
   if (currentWeatherQuery.isPending || forecastQuery.isPending) {
     return <WeatherOverviewSkeleton />;
@@ -133,11 +132,15 @@ export const WeatherOverview = ({
     <div className="mx-auto mt-8 max-w-7xl px-6">
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-slate-800">
+          <h2
+            className={`text-2xl font-bold transition-colors duration-500 ${weatherTheme.headingText}`}
+          >
             Weather Overview
           </h2>
 
-          <p className="text-sm text-slate-500">
+          <p
+            className={`text-sm transition-colors duration-500 ${weatherTheme.secondaryText}`}
+          >
             Current weather and forecast for your selected location.
           </p>
         </div>
