@@ -2,6 +2,7 @@ import { getItem, setItem } from "./LocalStorage";
 
 const FAVORITES_KEY = "favoriteCities";
 const RECENT_SEARCHES_KEY = "recentSearches";
+const MAX_RECENT_SEARCHES = 5;
 
 function getCities(storageKey: string): string[] {
   return getItem<string[]>(storageKey) ?? [];
@@ -40,7 +41,16 @@ export function getRecentSearches(): string[] {
 }
 
 export function addCityToRecentSearches(city: string): void {
-  addCity(RECENT_SEARCHES_KEY, city);
+  const recentSearches = getRecentSearches();
+
+  const updatedRecentSearches = [
+    city,
+    ...recentSearches.filter(
+      (recentCity) => recentCity.toLowerCase() !== city.toLowerCase(),
+    ),
+  ].slice(0, MAX_RECENT_SEARCHES);
+
+  setItem(RECENT_SEARCHES_KEY, updatedRecentSearches);
 }
 
 export function removeCityFromRecentSearches(city: string): void {
