@@ -125,7 +125,7 @@ export const HomePage = () => {
 
   return (
     <div
-      className={`flex min-h-screen flex-col bg-gradient-to-br transition-colors duration-700 ${weatherTheme.background}`}
+      className={`flex min-h-screen w-full flex-col bg-gradient-to-br transition-colors duration-700 ${weatherTheme.background}`}
     >
       <Header
         onSearch={handleSelectCity}
