@@ -130,10 +130,10 @@ export const WeatherOverview = ({
 
   return (
     <div className="mx-auto mt-8 max-w-7xl px-6">
-      <div className="mb-6 flex items-center justify-between">
+      <div className="mb-6 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <h2
-            className={`text-2xl font-bold transition-colors duration-500 ${weatherTheme.headingText}`}
+            className={`text-2xl sm:text-3xl font-bold transition-colors duration-500 ${weatherTheme.headingText}`}
           >
             Weather Overview
           </h2>
@@ -150,19 +150,26 @@ export const WeatherOverview = ({
           onClick={() =>
             isFavorite ? onRemoveFavorite(city) : onAddFavorite(city)
           }
-          className={`flex cursor-pointer items-center gap-2 rounded-xl border px-4 py-2 text-sm font-medium transition ${
-            isFavorite
-              ? "border-slate-300 bg-white text-slate-600 hover:border-red-300 hover:bg-red-50 hover:text-red-600"
-              : "border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
-          }`}
+          className={`flex cursor-pointer items-center gap-2 whitespace-nowrap rounded-xl border px-4 py-2 text-sm font-medium transition self-center sm:self-start
+      ${
+        isFavorite
+          ? "border-slate-300 bg-white text-slate-600 hover:border-red-300 hover:bg-red-50 hover:text-red-600"
+          : "border-amber-300 bg-amber-50 text-amber-700 hover:bg-amber-100"
+      }`}
         >
           <Star
-            className={`h-4 w-4 ${
+            className={`h-4 w-4 flex-shrink-0 ${
               isFavorite ? "fill-amber-400 text-amber-400" : ""
             }`}
           />
 
-          {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+          <span className="hidden sm:inline">
+            {isFavorite ? "Remove from Favorites" : "Add to Favorites"}
+          </span>
+
+          <span className="sm:hidden">
+            {isFavorite ? "Remove" : "Favorite"}
+          </span>
         </button>
       </div>
 
