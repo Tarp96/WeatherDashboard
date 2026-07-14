@@ -7,7 +7,7 @@ import {
   getFavoriteCities,
   addCityToFavorites,
   removeCityFromFavorites,
-} from "../utils/helpers/Favorites";
+} from "../utils/helpers/CityStorage";
 import { AnimatePresence, motion } from "framer-motion";
 
 type LocationMode = "featured" | "search" | "current";
