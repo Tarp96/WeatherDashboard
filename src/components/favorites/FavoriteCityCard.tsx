@@ -33,9 +33,10 @@ export const FavoriteCityCard = ({
           onDisplayCity(city);
         }
       }}
-      className={`relative flex w-64 items-center justify-between rounded-2xl border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg cursor-pointer ${
+      tabIndex={0}
+      className={`relative flex w-[calc(100vw-3rem)] max-w-64 shrink-0 cursor-pointer items-center justify-between rounded-2xl border bg-white p-5 transition-all duration-200 hover:-translate-y-1 hover:shadow-lg ${
         isHighlighted
-          ? "border-blue-500 ring-2 ring-blue-200 shadow-xl"
+          ? "border-blue-500 shadow-xl ring-2 ring-blue-200"
           : "border-slate-200 shadow-md"
       }`}
     >
