@@ -4,6 +4,7 @@ export interface WeatherTheme {
   secondaryText: string;
   footerBackground: string;
   footerText: string;
+  linkText: string;
 }
 
 export const getWeatherTheme = (
@@ -17,6 +18,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-300",
       footerBackground: "bg-slate-950/50",
       footerText: "text-slate-300",
+      linkText: "text-sky-300",
     };
   }
 
@@ -27,6 +29,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-200",
       footerBackground: "bg-slate-900/40",
       footerText: "text-slate-200",
+      linkText: "text-blue-600",
     };
   }
 
@@ -37,6 +40,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-200",
       footerBackground: "bg-slate-900/30",
       footerText: "text-slate-100",
+      linkText: "text-blue-600",
     };
   }
 
@@ -47,6 +51,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-500",
       footerBackground: "bg-white/40",
       footerText: "text-slate-600",
+      linkText: "text-blue-600",
     };
   }
 
@@ -57,6 +62,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-700",
       footerBackground: "bg-white/25",
       footerText: "text-slate-700",
+      linkText: "text-blue-600",
     };
   }
 
@@ -67,6 +73,7 @@ export const getWeatherTheme = (
       secondaryText: "text-slate-600",
       footerBackground: "bg-white/30",
       footerText: "text-slate-600",
+      linkText: "text-blue-600",
     };
   }
 
@@ -76,5 +83,6 @@ export const getWeatherTheme = (
     secondaryText: "text-slate-700",
     footerBackground: "bg-white/25",
     footerText: "text-slate-700",
+    linkText: "text-blue-600",
   };
 };

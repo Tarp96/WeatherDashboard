@@ -70,6 +70,7 @@ export const HomePage = () => {
     secondaryText: "text-slate-500",
     footerBackground: "bg-white/30",
     footerText: "text-slate-600",
+    linkText: "text-blue-600",
   };
   const [weatherTheme, setWeatherTheme] = useState<WeatherTheme>(defaultTheme);
 
@@ -168,7 +169,7 @@ export const HomePage = () => {
         </AnimatePresence>
       </main>
 
-      <Footer />
+      <Footer weatherTheme={weatherTheme} />
     </div>
   );
 };
