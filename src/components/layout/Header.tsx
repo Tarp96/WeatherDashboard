@@ -97,6 +97,11 @@ export const Header = ({
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => {
+                  if (!isSearching) {
+                    setShowRecentSearches(true);
+                  }
+                }}
                 placeholder="Search city..."
                 className="
                 w-full
@@ -121,34 +126,83 @@ export const Header = ({
                 md:w-72
               "
               />
+              {showRecentSearches && recentSearches.length > 0 && (
+                <div className="absolute left-0 top-full z-50 mt-2 w-full max-w-[288px] sm:w-72 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+                  <div className="border-b border-slate-100 px-3 py-2 sm:px-4">
+                    <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500 sm:text-xs">
+                      Recent searches
+                    </p>
+                  </div>
+
+                  <ul className="py-1">
+                    {recentSearches.map((city) => (
+                      <li
+                        key={city}
+                        className="group flex w-full min-w-0 items-center py-1 transition hover:bg-blue-50 overflow-hidden"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => handleRecentSearchClick(city)}
+                          className="flex min-w-0 flex-1 cursor-pointer items-center gap-2 px-3 py-2.5 text-left text-sm text-slate-700 transition group-hover:text-blue-700 
+                       max-[410px]:px-2 max-[410px]:gap-1.5 max-[410px]:pr-1"
+                        >
+                          <Search className="h-4 w-4 flex-shrink-0 text-slate-400 group-hover:text-blue-500" />
+
+                          <span className="min-w-0 flex-1 truncate font-medium">
+                            {city}
+                          </span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={(e) => handleRemoveRecentSearch(e, city)}
+                          aria-label={`Remove ${city} from recent searches`}
+                          className="mr-0.5 flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-md p-1 text-slate-400 transition hover:bg-red-50 hover:text-red-500 active:bg-red-100
+                       max-[410px]:mr-0 max-[410px]:-mr-1"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <button
               type="submit"
+              disabled={isSearching}
               className="
-              flex
-              shrink-0
-              cursor-pointer
-              items-center
-              rounded-xl
-              bg-blue-600
-              px-4
-              py-2
-              font-medium
-              text-white
-              transition
-              hover:bg-blue-700
-              focus:outline-none
-              focus:ring-2
-              focus:ring-blue-300
-              disabled:cursor-not-allowed
-              disabled:bg-blue-400
-              md:px-5
-            "
+    flex items-center gap-2
+    cursor-pointer
+    rounded-xl
+    bg-blue-600
+    px-5
+    py-2
+    font-medium
+    text-white
+    transition
+    hover:bg-blue-700
+    focus:outline-none
+    focus:ring-2
+    focus:ring-blue-300
+    disabled:cursor-not-allowed
+    disabled:bg-blue-400
+  "
             >
-              Search
+              {isSearching ? "Searching..." : "Search"}
             </button>
           </form>
+          <button
+            type="button"
+            onClick={onUseCurrentLocation}
+            className="group flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-blue-600 transition-all duration-200 hover:border-blue-200 hover:bg-white/60 hover:text-blue-700"
+          >
+            <MapPin className="h-4 w-4 transition-transform group-hover:scale-110" />
+            <span className="underline underline-offset-4">
+              Current Location
+            </span>
+          </button>
         </div>
       </div>
     </header>
