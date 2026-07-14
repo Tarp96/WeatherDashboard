@@ -1,26 +1,48 @@
 import { getItem, setItem } from "./LocalStorage";
 
 const FAVORITES_KEY = "favoriteCities";
+const RECENT_SEARCHES_KEY = "recentSearches";
 
-export function getFavoriteCities() {
-  return getItem<string[]>(FAVORITES_KEY) ?? [];
+function getCities(storageKey: string): string[] {
+  return getItem<string[]>(storageKey) ?? [];
 }
 
-export function addCityToFavorites(city: string) {
-  const favorites = getFavoriteCities();
+function addCity(storageKey: string, city: string): void {
+  const cities = getCities(storageKey);
 
-  if (!favorites.includes(city)) {
-    favorites.push(city);
-    setItem(FAVORITES_KEY, favorites);
-  }
+  if (cities.includes(city)) return;
+
+  setItem(storageKey, [...cities, city]);
 }
 
-export function removeCityFromFavorites(city: string) {
-  const favorites = getFavoriteCities();
+function removeCity(storageKey: string, city: string): void {
+  const cities = getCities(storageKey);
 
-  const updatedFavorites = favorites.filter(
-    (favoriteCity) => favoriteCity !== city,
-  );
+  const updatedCities = cities.filter((storedCity) => storedCity !== city);
 
-  setItem(FAVORITES_KEY, updatedFavorites);
+  setItem(storageKey, updatedCities);
+}
+
+export function getFavoriteCities(): string[] {
+  return getCities(FAVORITES_KEY);
+}
+
+export function addCityToFavorites(city: string): void {
+  addCity(FAVORITES_KEY, city);
+}
+
+export function removeCityFromFavorites(city: string): void {
+  removeCity(FAVORITES_KEY, city);
+}
+
+export function getRecentSearches(): string[] {
+  return getCities(RECENT_SEARCHES_KEY);
+}
+
+export function addCityToRecentSearches(city: string): void {
+  addCity(RECENT_SEARCHES_KEY, city);
+}
+
+export function removeCityFromRecentSearches(city: string): void {
+  removeCity(RECENT_SEARCHES_KEY, city);
 }
