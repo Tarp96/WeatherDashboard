@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import type { SubmitEventHandler } from "react";
 import { Search, MapPin, X } from "lucide-react";
 import { addCityToRecentSearches } from "../../utils/helpers/CityStorage";
@@ -23,6 +23,25 @@ export const Header = ({
     useState<string[]>(getRecentSearches);
 
   const [showRecentSearches, setShowRecentSearches] = useState(false);
+
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        searchRef.current &&
+        !searchRef.current.contains(event.target as Node)
+      ) {
+        setShowRecentSearches(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -65,7 +84,7 @@ export const Header = ({
           <span className="text-blue-600">DB</span>
         </h1>
 
-        <div className="relative">
+        <div className="relative" ref={searchRef}>
           <form onSubmit={handleSubmit} className="flex items-center gap-3">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 h-5 w-5 -translate-y-1/2 text-gray-400" />
