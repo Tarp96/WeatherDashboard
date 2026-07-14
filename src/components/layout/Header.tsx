@@ -1,6 +1,7 @@
 import { useState } from "react";
 import type { SubmitEventHandler } from "react";
 import { Search, MapPin } from "lucide-react";
+import { addCityToRecentSearches } from "../../utils/helpers/CityStorage";
 
 type HeaderProps = {
   onSearch: (city: string) => void;
@@ -18,9 +19,12 @@ export const Header = ({
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
 
-    if (!query.trim()) return;
+    const city = query.trim();
 
-    onSearch(query.trim());
+    if (!city) return;
+
+    onSearch(city);
+    addCityToRecentSearches(city);
   };
 
   return (
