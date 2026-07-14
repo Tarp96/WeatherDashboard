@@ -1,7 +1,11 @@
 import { useState } from "react";
 import type { SubmitEventHandler } from "react";
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, X } from "lucide-react";
 import { addCityToRecentSearches } from "../../utils/helpers/CityStorage";
+import {
+  getRecentSearches,
+  removeCityFromRecentSearches,
+} from "../../utils/helpers/CityStorage";
 
 type HeaderProps = {
   onSearch: (city: string) => void;
@@ -15,6 +19,10 @@ export const Header = ({
   onUseCurrentLocation,
 }: HeaderProps) => {
   const [query, setQuery] = useState("");
+  const [recentSearches, setRecentSearches] =
+    useState<string[]>(getRecentSearches);
+
+  const [showRecentSearches, setShowRecentSearches] = useState(false);
 
   const handleSubmit: SubmitEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -25,6 +33,28 @@ export const Header = ({
 
     onSearch(city);
     addCityToRecentSearches(city);
+
+    setRecentSearches(getRecentSearches());
+    setShowRecentSearches(false);
+  };
+
+  const handleRecentSearchClick = (city: string) => {
+    setQuery(city);
+    onSearch(city);
+
+    addCityToRecentSearches(city);
+    setRecentSearches(getRecentSearches());
+    setShowRecentSearches(false);
+  };
+
+  const handleRemoveRecentSearch = (
+    e: React.MouseEvent<HTMLButtonElement>,
+    city: string,
+  ) => {
+    e.stopPropagation();
+
+    removeCityFromRecentSearches(city);
+    setRecentSearches(getRecentSearches());
   };
 
   return (
@@ -45,6 +75,11 @@ export const Header = ({
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
+                onFocus={() => {
+                  if (!isSearching) {
+                    setShowRecentSearches(true);
+                  }
+                }}
                 placeholder="Search city..."
                 className="
         w-72
@@ -67,6 +102,42 @@ export const Header = ({
         disabled:opacity-60
       "
               />
+              {showRecentSearches && recentSearches.length > 0 && (
+                <div className="absolute left-0 top-full z-50 mt-2 w-72 overflow-hidden rounded-xl border border-slate-200 bg-white shadow-lg">
+                  <div className="border-b border-slate-100 px-4 py-2">
+                    <p className="text-xs font-semibold uppercase tracking-wide text-slate-500">
+                      Recent searches
+                    </p>
+                  </div>
+
+                  <ul className="py-1">
+                    {recentSearches.map((city) => (
+                      <li
+                        key={city}
+                        className="group flex items-center transition hover:bg-blue-50"
+                      >
+                        <button
+                          type="button"
+                          onClick={() => handleRecentSearchClick(city)}
+                          className="flex flex-1 cursor-pointer items-center gap-2 px-4 py-2 text-left text-sm text-slate-700 transition group-hover:text-blue-700"
+                        >
+                          <Search className="h-4 w-4 text-slate-400 group-hover:text-blue-500" />
+                          {city}
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={(e) => handleRemoveRecentSearch(e, city)}
+                          aria-label={`Remove ${city} from recent searches`}
+                          className="mr-2 cursor-pointer rounded-md p-1 text-slate-400 transition hover:bg-red-50 hover:text-red-500"
+                        >
+                          <X className="h-4 w-4" />
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </div>
 
             <button
