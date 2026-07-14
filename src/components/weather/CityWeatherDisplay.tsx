@@ -19,30 +19,33 @@ export const CityWeatherDisplay = ({
 
   return (
     <DashboardCard className="grid h-full grid-cols-1 gap-6 md:grid-cols-[2fr_1fr]">
-      {" "}
       <div className="rounded-2xl bg-gray-50 p-6">
         {isFeaturedCity && (
           <p className="mb-2 inline-flex rounded-full bg-blue-100 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-blue-700">
             Featured City
           </p>
         )}
-        <div>
-          <h2 className="text-3xl font-bold text-gray-900">
-            {data.city}
-            {data.state && `, ${data.state}`}
-          </h2>
+        <div className="space-y-4 sm:space-y-6">
+          <div>
+            <h2 className="text-2xl sm:text-4xl font-bold text-gray-900">
+              {data.city}
+              {data.state && `, ${data.state}`}
+            </h2>
 
-          <p className="mt-1 text-lg text-gray-500">{data.country}</p>
-        </div>
+            <p className="mt-1 text-base sm:text-lg text-gray-500">
+              {data.country}
+            </p>
+          </div>
 
-        <div className="mt-8 flex items-end gap-3">
-          <p className="text-7xl font-bold tracking-tight text-gray-900">
-            {Math.round(currentConditions.temp)}°C
-          </p>
+          <div className="flex items-end gap-2.5">
+            <p className="text-5xl sm:text-7xl font-bold tracking-tighter text-gray-900">
+              {Math.round(currentConditions.temp)}°C
+            </p>
 
-          <p className="mb-2 text-sm text-gray-500">
-            Feels like {Math.round(currentConditions.feels_like)}°C
-          </p>
+            <p className="mb-1 text-sm sm:text-base text-gray-500">
+              Feels like {Math.round(currentConditions.feels_like)}°C
+            </p>
+          </div>
         </div>
 
         <div className="mt-8 grid grid-cols-2 gap-4">
