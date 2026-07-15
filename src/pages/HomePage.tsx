@@ -148,6 +148,7 @@ export const HomePage = () => {
           onDisplayCity={handleSelectCity}
           selectedCity={selectedCity}
           headingTextClass={weatherTheme.headingText}
+          unit={unit}
         />
         <AnimatePresence mode="wait">
           <motion.div

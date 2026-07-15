@@ -3,6 +3,7 @@ import { getWeatherDataWithCoordinates } from "../../services/api/WeatherService
 import { FavoriteCityCard } from "./FavoriteCityCard";
 import { Star } from "lucide-react";
 import { AnimatePresence } from "motion/react";
+import { Unit } from "../../types/Weather";
 
 type FavoritesBarProps = {
   favoriteCityList: string[];
@@ -10,6 +11,7 @@ type FavoritesBarProps = {
   onDisplayCity: (city: string) => void;
   selectedCity: string;
   headingTextClass: string;
+  unit: Unit;
 };
 
 export const FavoritesBar = ({
@@ -18,13 +20,14 @@ export const FavoritesBar = ({
   onDisplayCity,
   selectedCity,
   headingTextClass,
+  unit,
 }: FavoritesBarProps) => {
   const favoriteQueries = useQueries({
     queries: [...favoriteCityList]
       .sort((a, b) => a.localeCompare(b))
       .map((city) => ({
-        queryKey: ["favorite", city],
-        queryFn: () => getWeatherDataWithCoordinates(city),
+        queryKey: ["favorite", city, unit],
+        queryFn: () => getWeatherDataWithCoordinates(city, unit),
       })),
   });
 
