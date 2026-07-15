@@ -1,6 +1,7 @@
 import { Star, MapPin } from "lucide-react";
 import { motion } from "motion/react";
 import { Unit } from "../../types/Weather";
+import { getTemperatureUnit } from "../../utils/helpers/GetTemperatureUnit";
 
 type FavoriteCityCardProps = {
   city: string;
@@ -26,7 +27,7 @@ export const FavoriteCityCard = ({
   unit,
 }: FavoriteCityCardProps) => {
   const isHighlighted = city === selectedCity;
-  const temperatureUnit = unit === "metric" ? "°C" : "°F";
+  const temperatureUnit = getTemperatureUnit(unit);
 
   return (
     <motion.article
