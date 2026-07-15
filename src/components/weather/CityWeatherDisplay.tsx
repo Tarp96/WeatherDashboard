@@ -48,7 +48,7 @@ export const CityWeatherDisplay = ({
           </div>
         </div>
 
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-8 grid grid-cols-1 sm:grid-cols-2 gap-4">
           <WeatherInfoCard
             icon={Droplets}
             label="Humidity"
@@ -64,19 +64,19 @@ export const CityWeatherDisplay = ({
           />
         </div>
       </div>
-      <div className="flex flex-col items-center justify-center rounded-2xl bg-white/10 p-6 text-center backdrop-blur-sm">
+      <div className="flex flex-col items-center justify-center rounded-2xl bg-white/10 p-4 sm:p-6 text-center backdrop-blur-sm">
         <AnimatedWeatherIcon
           iconCode={weatherDescription.icon}
           weatherId={weatherDescription.id}
           description={weatherDescription.description}
-          className="h-32 w-32 object-contain"
+          className="h-24 w-24 sm:h-32 sm:w-32 object-contain"
         />
 
-        <p className="mt-2 text-xl font-semibold capitalize">
+        <p className="mt-3 text-lg sm:text-xl font-semibold capitalize">
           {weatherDescription.description}
         </p>
 
-        <p className="mt-1 text-sm ">{weatherDescription.main}</p>
+        <p className="mt-1 text-sm text-white/80">{weatherDescription.main}</p>
       </div>
     </DashboardCard>
   );
