@@ -86,6 +86,7 @@ export const FavoritesBar = ({
         onRemoveFavorite={onRemoveFavorite}
         onDisplayCity={onDisplayCity}
         selectedCity={selectedCity}
+        unit={unit}
       />
     );
   });
