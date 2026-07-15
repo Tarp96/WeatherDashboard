@@ -14,7 +14,7 @@ type HeaderProps = {
   isSearching: boolean;
   onUseCurrentLocation: () => void;
   unit: Unit;
-  onToggleUnit: () => void;
+  onToggleUnit: (unit: Unit) => void;
 };
 
 export const Header = ({

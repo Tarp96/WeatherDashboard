@@ -11,6 +11,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 import { WeatherTheme } from "../utils/helpers/GetWeatherBackground";
 import { Unit } from "../types/Weather";
+import { getSavedUnit, saveUnit } from "../utils/helpers/UnitStorage";
 
 type LocationMode = "featured" | "search" | "current";
 
@@ -64,7 +65,7 @@ export const HomePage = () => {
   const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
     getFavoriteCities(),
   );
-  const [unit, setUnit] = useState<Unit>("metric");
+  const [unit, setUnit] = useState<Unit>(getSavedUnit);
 
   const defaultTheme: WeatherTheme = {
     background: "from-sky-50 to-blue-100",
@@ -97,8 +98,9 @@ export const HomePage = () => {
     setFavoriteCities(getFavoriteCities());
   };
 
-  const handleUnitChange = () => {
-    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
+  const handleUnitChange = (unit: Unit) => {
+    setUnit(unit);
+    saveUnit(unit);
   };
 
   const handleUseCurrentLocation = () => {
