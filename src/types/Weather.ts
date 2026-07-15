@@ -113,3 +113,5 @@ export interface AirPollutionComponents {
   pm10: number;
   nh3: number;
 }
+
+export type Unit = "metric" | "imperial";
