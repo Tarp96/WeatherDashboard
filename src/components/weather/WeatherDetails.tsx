@@ -25,7 +25,8 @@ export const WeatherDetails = ({
     <DashboardCard>
       <div className="flex h-full flex-col">
         <h2 className="mb-4 text-lg font-semibold text-slate-900">Details</h2>
-        <div className="mt-8 grid flex-1 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+
+        <div className="mt-8 grid flex-1 grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
           <WeatherInfoCard
             icon={Sunrise}
             value={timeStampConverter(
