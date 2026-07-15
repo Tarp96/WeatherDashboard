@@ -6,11 +6,14 @@ import {
   getRecentSearches,
   removeCityFromRecentSearches,
 } from "../../utils/helpers/CityStorage";
+import { UnitToggle } from "../ui/UnitToggle";
+import { Unit } from "../../types/Weather";
 
 type HeaderProps = {
   onSearch: (city: string) => void;
   isSearching: boolean;
   onUseCurrentLocation: () => void;
+  unit: Unit;
   onToggleUnit: () => void;
 };
 
@@ -18,6 +21,7 @@ export const Header = ({
   onSearch,
   isSearching,
   onUseCurrentLocation,
+  unit,
   onToggleUnit,
 }: HeaderProps) => {
   const [query, setQuery] = useState("");
@@ -195,17 +199,20 @@ export const Header = ({
               {isSearching ? "Searching..." : "Search"}
             </button>
           </form>
-          <button
-            type="button"
-            onClick={onUseCurrentLocation}
-            className="group flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-blue-600 transition-all duration-200 hover:border-blue-200 hover:bg-white/60 hover:text-blue-700"
-          >
-            <MapPin className="h-4 w-4 transition-transform group-hover:scale-110" />
-            <span className="underline underline-offset-4">
-              Current Location
-            </span>
-          </button>
-          <button>Toggle</button>
+          <div className="mt-3 flex items-center gap-2 md:mt-2">
+            <button
+              type="button"
+              onClick={onUseCurrentLocation}
+              className="group flex cursor-pointer items-center gap-2 rounded-lg border border-transparent px-3 py-2 text-sm font-medium text-blue-600 transition-all duration-200 hover:border-blue-200 hover:bg-white/60 hover:text-blue-700"
+            >
+              <MapPin className="h-4 w-4 transition-transform group-hover:scale-110" />
+              <span className="underline underline-offset-4">
+                Current Location
+              </span>
+            </button>
+
+            <UnitToggle unit={unit} onToggle={onToggleUnit} />
+          </div>
         </div>
       </div>
     </header>

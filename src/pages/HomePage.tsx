@@ -137,6 +137,8 @@ export const HomePage = () => {
         onSearch={handleSelectCity}
         isSearching={isSearching}
         onUseCurrentLocation={handleUseCurrentLocation}
+        unit={unit}
+        onToggleUnit={handleUnitChange}
       />
 
       <main className="flex-1">
