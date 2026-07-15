@@ -1,4 +1,4 @@
-import { FiveDayForecastResponse } from "../../types/Weather";
+import { FiveDayForecastResponse, Unit } from "../../types/Weather";
 import { FiveDayForecastCard } from "./FiveDayForecastCard";
 import {
   formatTime,
@@ -8,6 +8,7 @@ import { DashboardCard } from "../ui/DashboardCard";
 
 interface FiveDayForecastContainerProps {
   data?: FiveDayForecastResponse;
+  unit: Unit;
 }
 
 export interface DisplayForecastItems {
@@ -26,6 +27,7 @@ type WeatherSortedByDate = {
 
 export const FiveDayForecastContainer = ({
   data,
+  unit,
 }: FiveDayForecastContainerProps) => {
   const foreCastItems = data?.list ?? [];
   const timezoneOffset = data?.city.timezone ?? 0;
@@ -121,6 +123,7 @@ export const FiveDayForecastContainer = ({
         highestTemp={item.highestTemp}
         humidity={item.averageHumidity.toFixed(2)}
         windSpeed={item.averageWindSpeed.toFixed(2)}
+        unit={unit}
       />
     ));
 

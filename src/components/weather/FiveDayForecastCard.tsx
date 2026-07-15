@@ -1,5 +1,10 @@
 import { ArrowDown, ArrowUp, Droplet, Wind } from "lucide-react";
 import { formatWeatherDescription } from "../../utils/helpers/HelperFunctions";
+import { Unit } from "../../types/Weather";
+import {
+  getTemperatureUnit,
+  getSpeedUnit,
+} from "../../utils/helpers/GetTemperatureUnit";
 
 interface FiveDayForecastCardProps {
   date: number | string;
@@ -8,6 +13,7 @@ interface FiveDayForecastCardProps {
   highestTemp: number;
   humidity: number;
   windSpeed: number;
+  unit: Unit;
 }
 
 export const FiveDayForecastCard = ({
@@ -17,7 +23,10 @@ export const FiveDayForecastCard = ({
   highestTemp,
   humidity,
   windSpeed,
+  unit,
 }: FiveDayForecastCardProps) => {
+  const temperatureUnit = getTemperatureUnit(unit);
+  const speedUnit = getSpeedUnit(unit);
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
@@ -36,12 +45,18 @@ export const FiveDayForecastCard = ({
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2">
             <ArrowUp className="h-5 w-5 text-red-400" />
-            <span className="font-semibold text-slate-900">{highestTemp}°</span>
+            <span className="font-semibold text-slate-900">
+              {highestTemp}
+              {temperatureUnit}
+            </span>
           </div>
 
           <div className="flex items-center gap-2">
             <ArrowDown className="h-5 w-5 text-blue-400" />
-            <span className="font-semibold text-slate-900">{lowestTemp}°</span>
+            <span className="font-semibold text-slate-900">
+              {lowestTemp}
+              {temperatureUnit}
+            </span>
           </div>
         </div>
 
@@ -53,7 +68,10 @@ export const FiveDayForecastCard = ({
 
           <div className="flex items-center gap-2">
             <Wind className="h-5 w-5 text-blue-400" />
-            <span>{windSpeed} m/s</span>
+            <span>
+              {windSpeed}
+              {speedUnit}
+            </span>
           </div>
         </div>
       </div>
