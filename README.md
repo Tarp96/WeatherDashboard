@@ -16,7 +16,9 @@ Built as a portfolio project to strengthen my frontend development skills, with 
 
 ![Mobile Preview](./screenshots/mobileScreenImage.png)
 
-> 🚧 **Live Demo:** [Coming soon]
+## 🌍 Live Demo
+
+🔗 https://weatherdb.vercel.app/
 
 ---
 
