@@ -1,14 +1,16 @@
 import { CityNotFoundError } from "../../components/errors/CityNotFoundError";
+
 import {
   WeatherApiResponse,
   CityWeatherData,
   AirPollutionResponse,
+  Unit,
 } from "../../types/Weather";
 
 export const getWeatherData = async (
   lat: number,
   lon: number,
-  unit: string,
+  unit: Unit,
 ): Promise<WeatherApiResponse> => {
   const response = await fetch(
     `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=${unit}`,
@@ -48,7 +50,7 @@ export const getCityByCoordinates = async (lat: number, lon: number) => {
 export const getWeatherDataByCoordinates = async (
   lat: number,
   lon: number,
-  unit: string,
+  unit: Unit,
 ) => {
   const locationData = await getCityByCoordinates(lat, lon);
 
@@ -70,7 +72,7 @@ export const getWeatherDataByCoordinates = async (
 
 export const getWeatherDataWithCoordinates = async (
   city: string,
-  unit: string,
+  unit: Unit,
 ): Promise<CityWeatherData> => {
   const geoData = await getCoordinatesByCity(city);
 
@@ -89,7 +91,7 @@ export const getWeatherDataWithCoordinates = async (
   };
 };
 
-const fetchFiveDayForecast = async (lat: number, lon: number, unit: string) => {
+const fetchFiveDayForecast = async (lat: number, lon: number, unit: Unit) => {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=${unit}`,
   );
@@ -101,7 +103,7 @@ const fetchFiveDayForecast = async (lat: number, lon: number, unit: string) => {
   return response.json();
 };
 
-export const getFiveDayForecastData = async (city: string, unit: string) => {
+export const getFiveDayForecastData = async (city: string, unit: Unit) => {
   const geoData = await getCoordinatesByCity(city);
 
   if (!geoData.length) {
@@ -116,7 +118,7 @@ export const getFiveDayForecastData = async (city: string, unit: string) => {
 export const getFiveDayForecastByCoordinates = async (
   lat: number,
   lon: number,
-  unit: string,
+  unit: Unit,
 ) => {
   return fetchFiveDayForecast(lat, lon, unit);
 };
