@@ -21,15 +21,18 @@ export const FiveDayForecastCard = ({
   return (
     <div className="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <div className="min-w-[110px]">
-          <p className="text-sm font-semibold leading-tight text-slate-900">
-            {date}
-          </p>
+        <div className="flex items-start gap-3 sm:items-center">
+          <div className="min-w-[110px] flex-shrink-0">
+            <p className="text-sm font-semibold leading-tight text-slate-900 whitespace-nowrap">
+              {date}
+            </p>
+          </div>
 
-          <p className="mt-1 text-xs text-slate-500 capitalize">
+          <p className="text-xs text-slate-500 capitalize leading-tight">
             {formatWeatherDescription(weatherDescription)}
           </p>
         </div>
+
         <div className="flex items-center gap-5">
           <div className="flex items-center gap-2">
             <ArrowUp className="h-5 w-5 text-red-400" />
