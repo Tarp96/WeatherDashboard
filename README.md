@@ -1,5 +1,10 @@
 # WeatherDB
 
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react&logoColor=black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite&logoColor=white)
+
 A modern, responsive weather dashboard built with **React**, **TypeScript**, and **Tailwind CSS** that delivers real-time weather data, interactive forecasts, air quality information, and favorite locations using the OpenWeather API.
 
 Built as a portfolio project to strengthen my frontend development skills, with a focus on reusable components, responsive design, API integration, state management, and polished user experiences.
