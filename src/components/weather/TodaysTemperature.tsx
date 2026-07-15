@@ -10,12 +10,16 @@ import {
   Legend,
 } from "recharts";
 import { DashboardCard } from "../ui/DashboardCard";
+import { getTemperatureUnit } from "../../utils/helpers/GetTemperatureUnit";
+import { Unit } from "../../types/Weather";
 
 interface TodaysTemperatureProps {
   data: FiveDayForecastResponse;
+  unit: Unit;
 }
 
-export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
+export const TodaysTemperature = ({ data, unit }: TodaysTemperatureProps) => {
+  const temperatureUnit = getTemperatureUnit(unit);
   const dailyForecast = data.list.slice(0, 8);
 
   const chartData = dailyForecast.map((forecast) => ({
@@ -46,7 +50,8 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
         </h2>
 
         <p className="text-sm sm:text-base text-slate-600">
-          Average temperature: {averageTemp}°C
+          Average temperature: {averageTemp}
+          {temperatureUnit}
         </p>
       </div>
 
@@ -89,7 +94,8 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
 
             <Tooltip
               formatter={(value, name) => {
-                if (name === "Temperature") return [`${value}°C`, name];
+                if (name === "Temperature")
+                  return [`${value}${temperatureUnit}`, name];
                 return [`${value}%`, name];
               }}
             />

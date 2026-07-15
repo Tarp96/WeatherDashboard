@@ -180,6 +180,7 @@ export const WeatherOverview = ({
         <CityWeatherDisplay
           data={currentWeatherQuery.data}
           isFeaturedCity={isFeaturedCity}
+          unit={unit}
         />
         <WeatherDetails
           data={currentWeatherQuery.data}
@@ -188,7 +189,7 @@ export const WeatherOverview = ({
       </div>
 
       <div className="mt-6 grid gap-6 lg:grid-cols-[3fr_2fr]">
-        <TodaysTemperature data={forecastQuery.data} />
+        <TodaysTemperature data={forecastQuery.data} unit={unit} />
         <FiveDayForecastContainer data={forecastQuery.data} />
       </div>
     </div>

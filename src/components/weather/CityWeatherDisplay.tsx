@@ -1,21 +1,29 @@
-import { CityWeatherData } from "../../types/Weather";
+import { CityWeatherData, Unit } from "../../types/Weather";
 import { Droplets, Wind } from "lucide-react";
 import { WeatherInfoCard } from "../ui/WeatherInfoCard";
 import { DashboardCard } from "../ui/DashboardCard";
 import { AnimatedWeatherIcon } from "../ui/AnimatedWeatherIcon";
+import {
+  getTemperatureUnit,
+  getSpeedUnit,
+} from "../../utils/helpers/GetTemperatureUnit";
 
 interface CityWeatherDisplayProps {
   data: CityWeatherData;
   isFeaturedCity: boolean;
+  unit: Unit;
 }
 
 export const CityWeatherDisplay = ({
   data,
   isFeaturedCity,
+  unit,
 }: CityWeatherDisplayProps) => {
   const weatherApiResponse = data.weather;
   const currentConditions = weatherApiResponse.data[0];
   const weatherDescription = currentConditions.weather[0];
+  const temperatureUnit = getTemperatureUnit(unit);
+  const speedUnit = getSpeedUnit(unit);
 
   return (
     <DashboardCard className="grid h-full grid-cols-1 gap-6 md:grid-cols-[2fr_1fr]">
@@ -39,11 +47,13 @@ export const CityWeatherDisplay = ({
 
           <div className="flex items-end gap-2.5">
             <p className="text-5xl sm:text-7xl font-bold tracking-tighter text-gray-900">
-              {Math.round(currentConditions.temp)}°C
+              {Math.round(currentConditions.temp)}
+              {temperatureUnit}
             </p>
 
             <p className="mb-1 text-sm sm:text-base text-gray-500">
-              Feels like {Math.round(currentConditions.feels_like)}°C
+              Feels like {Math.round(currentConditions.feels_like)}
+              {temperatureUnit}
             </p>
           </div>
         </div>
@@ -59,7 +69,7 @@ export const CityWeatherDisplay = ({
           <WeatherInfoCard
             icon={Wind}
             label="Wind"
-            value={`${currentConditions.wind_speed.toString()}m/s`}
+            value={`${currentConditions.wind_speed.toString()}${speedUnit}`}
             variant="light"
           />
         </div>
