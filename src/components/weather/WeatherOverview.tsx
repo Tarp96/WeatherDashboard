@@ -35,6 +35,7 @@ type WeatherOverviewProps = {
   favoriteCities: string[];
   onThemeChange: (theme: WeatherTheme) => void;
   weatherTheme: WeatherTheme;
+  unit: string;
 };
 
 export const WeatherOverview = ({
@@ -48,6 +49,7 @@ export const WeatherOverview = ({
   favoriteCities,
   onThemeChange,
   weatherTheme,
+  unit,
 }: WeatherOverviewProps) => {
   const isFavorite = favoriteCities.includes(city);
 
@@ -63,8 +65,8 @@ export const WeatherOverview = ({
 
     queryFn: () =>
       useCurrentLocation
-        ? getWeatherDataByCoordinates(geo!.lat, geo!.lon)
-        : getWeatherDataWithCoordinates(city),
+        ? getWeatherDataByCoordinates(geo!.lat, geo!.lon, unit)
+        : getWeatherDataWithCoordinates(city, unit),
 
     enabled: useCurrentLocation ? !!geo : !!city,
   });
@@ -76,8 +78,8 @@ export const WeatherOverview = ({
 
     queryFn: () =>
       useCurrentLocation
-        ? getFiveDayForecastByCoordinates(geo!.lat, geo!.lon)
-        : getFiveDayForecastData(city),
+        ? getFiveDayForecastByCoordinates(geo!.lat, geo!.lon, unit)
+        : getFiveDayForecastData(city, unit),
 
     enabled: useCurrentLocation ? !!geo : !!city,
   });

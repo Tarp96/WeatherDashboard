@@ -8,9 +8,10 @@ import {
 export const getWeatherData = async (
   lat: number,
   lon: number,
+  unit: string,
 ): Promise<WeatherApiResponse> => {
   const response = await fetch(
-    `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`,
+    `https://api.openweathermap.org/data/4.0/onecall/current?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=${unit}`,
   );
 
   if (!response.ok) {
@@ -44,7 +45,11 @@ export const getCityByCoordinates = async (lat: number, lon: number) => {
   return response.json();
 };
 
-export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
+export const getWeatherDataByCoordinates = async (
+  lat: number,
+  lon: number,
+  unit: string,
+) => {
   const locationData = await getCityByCoordinates(lat, lon);
 
   if (!locationData.length) {
@@ -53,7 +58,7 @@ export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
 
   const { name, country, state } = locationData[0];
 
-  const weather = await getWeatherData(lat, lon);
+  const weather = await getWeatherData(lat, lon, unit);
 
   return {
     city: name,
@@ -65,6 +70,7 @@ export const getWeatherDataByCoordinates = async (lat: number, lon: number) => {
 
 export const getWeatherDataWithCoordinates = async (
   city: string,
+  unit: string,
 ): Promise<CityWeatherData> => {
   const geoData = await getCoordinatesByCity(city);
 
@@ -73,7 +79,7 @@ export const getWeatherDataWithCoordinates = async (
   }
 
   const { lat, lon, name, country, state } = geoData[0];
-  const weather = await getWeatherData(lat, lon);
+  const weather = await getWeatherData(lat, lon, unit);
 
   return {
     city: name,
@@ -83,9 +89,9 @@ export const getWeatherDataWithCoordinates = async (
   };
 };
 
-const fetchFiveDayForecast = async (lat: number, lon: number) => {
+const fetchFiveDayForecast = async (lat: number, lon: number, unit: string) => {
   const response = await fetch(
-    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=metric`,
+    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${import.meta.env.VITE_API_KEY}&units=${unit}`,
   );
 
   if (!response.ok) {
@@ -95,7 +101,7 @@ const fetchFiveDayForecast = async (lat: number, lon: number) => {
   return response.json();
 };
 
-export const getFiveDayForecastData = async (city: string) => {
+export const getFiveDayForecastData = async (city: string, unit: string) => {
   const geoData = await getCoordinatesByCity(city);
 
   if (!geoData.length) {
@@ -104,14 +110,15 @@ export const getFiveDayForecastData = async (city: string) => {
 
   const { lat, lon } = geoData[0];
 
-  return fetchFiveDayForecast(lat, lon);
+  return fetchFiveDayForecast(lat, lon, unit);
 };
 
 export const getFiveDayForecastByCoordinates = async (
   lat: number,
   lon: number,
+  unit: string,
 ) => {
-  return fetchFiveDayForecast(lat, lon);
+  return fetchFiveDayForecast(lat, lon, unit);
 };
 
 export const fetchAirPollutionData = async (

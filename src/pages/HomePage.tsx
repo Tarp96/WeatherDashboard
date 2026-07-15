@@ -63,6 +63,7 @@ export const HomePage = () => {
   const [favoriteCities, setFavoriteCities] = useState<string[]>(() =>
     getFavoriteCities(),
   );
+  const [unit, setUnit] = useState<"metric" | "imperial">("metric");
 
   const defaultTheme: WeatherTheme = {
     background: "from-sky-50 to-blue-100",
@@ -93,6 +94,10 @@ export const HomePage = () => {
   const handleRemoveFromFavorites = (city: string) => {
     removeCityFromFavorites(city);
     setFavoriteCities(getFavoriteCities());
+  };
+
+  const handleUnitChange = () => {
+    setUnit((prev) => (prev === "metric" ? "imperial" : "metric"));
   };
 
   const handleUseCurrentLocation = () => {
@@ -164,6 +169,7 @@ export const HomePage = () => {
               favoriteCities={favoriteCities}
               onThemeChange={setWeatherTheme}
               weatherTheme={weatherTheme}
+              unit={unit}
             />
           </motion.div>
         </AnimatePresence>
