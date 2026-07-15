@@ -36,61 +36,65 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
 
   return (
     <DashboardCard className="flex h-full flex-col">
-      <div className="mb-6">
+      <div className="mb-4 sm:mb-6">
         <p className="text-sm font-medium text-slate-500">
           Today&apos;s Weather
         </p>
 
-        <h2 className="text-2xl font-bold text-slate-900">24 Hour Forecast</h2>
+        <h2 className="text-xl sm:text-2xl font-bold text-slate-900">
+          24 Hour Forecast
+        </h2>
 
-        <p className="text-slate-600">Average temperature: {averageTemp}°C</p>
+        <p className="text-sm sm:text-base text-slate-600">
+          Average temperature: {averageTemp}°C
+        </p>
       </div>
 
-      <div className="mt-6 flex-1">
+      <div className="mt-2 flex-1 min-h-[260px] sm:min-h-[320px]">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart
             data={chartData}
-            margin={{ top: 10, right: 0, left: -20, bottom: 0 }}
+            margin={{ top: 10, right: 10, left: -10, bottom: 0 }}
           >
             <CartesianGrid strokeDasharray="3 3" vertical={false} />
 
             <XAxis
               dataKey="time"
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 11 }}
               tickLine={false}
               axisLine={false}
+              interval="preserveStartEnd"
             />
 
             <YAxis
               yAxisId="temperature"
               domain={[minTemp, maxTemp]}
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               unit="°"
+              width={35}
             />
 
             <YAxis
               yAxisId="precipitation"
               orientation="right"
               domain={[0, 100]}
-              tick={{ fontSize: 12 }}
+              tick={{ fontSize: 11 }}
               tickLine={false}
               axisLine={false}
               unit="%"
+              width={35}
             />
 
             <Tooltip
               formatter={(value, name) => {
-                if (name === "Temperature") {
-                  return [`${value}°C`, name];
-                }
-
+                if (name === "Temperature") return [`${value}°C`, name];
                 return [`${value}%`, name];
               }}
             />
 
-            <Legend />
+            <Legend verticalAlign="top" height={36} iconSize={8} />
 
             <Line
               yAxisId="temperature"
@@ -98,9 +102,9 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
               dataKey="temp"
               name="Temperature"
               stroke="#2563eb"
-              strokeWidth={3}
-              dot={{ r: 4 }}
-              activeDot={{ r: 6 }}
+              strokeWidth={2.5}
+              dot={{ r: 3 }}
+              activeDot={{ r: 5 }}
             />
 
             <Line
@@ -111,8 +115,8 @@ export const TodaysTemperature = ({ data }: TodaysTemperatureProps) => {
               stroke="#0ea5e9"
               strokeWidth={2}
               strokeDasharray="5 5"
-              dot={{ r: 3 }}
-              activeDot={{ r: 5 }}
+              dot={{ r: 2.5 }}
+              activeDot={{ r: 4 }}
             />
           </LineChart>
         </ResponsiveContainer>
