@@ -6,6 +6,7 @@ import {
   CityWeatherData,
   FiveDayForecastResponse,
   AirPollutionResponse,
+  Unit,
 } from "../../types/Weather";
 import {
   getFiveDayForecastData,
@@ -35,7 +36,7 @@ type WeatherOverviewProps = {
   favoriteCities: string[];
   onThemeChange: (theme: WeatherTheme) => void;
   weatherTheme: WeatherTheme;
-  unit: string;
+  unit: Unit;
 };
 
 export const WeatherOverview = ({
@@ -60,8 +61,8 @@ export const WeatherOverview = ({
 
   const currentWeatherQuery = useQuery<CityWeatherData>({
     queryKey: useCurrentLocation
-      ? ["currentWeather", geo?.lat, geo?.lon]
-      : ["currentWeather", city],
+      ? ["currentWeather", geo?.lat, geo?.lon, unit]
+      : ["currentWeather", city, unit],
 
     queryFn: () =>
       useCurrentLocation
@@ -73,8 +74,8 @@ export const WeatherOverview = ({
 
   const forecastQuery = useQuery<FiveDayForecastResponse>({
     queryKey: useCurrentLocation
-      ? ["forecast", geo?.lat, geo?.lon]
-      : ["forecast", city],
+      ? ["forecast", geo?.lat, geo?.lon, unit]
+      : ["forecast", city, unit],
 
     queryFn: () =>
       useCurrentLocation
