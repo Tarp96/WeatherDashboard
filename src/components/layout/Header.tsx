@@ -11,12 +11,14 @@ type HeaderProps = {
   onSearch: (city: string) => void;
   isSearching: boolean;
   onUseCurrentLocation: () => void;
+  onToggleUnit: () => void;
 };
 
 export const Header = ({
   onSearch,
   isSearching,
   onUseCurrentLocation,
+  onToggleUnit,
 }: HeaderProps) => {
   const [query, setQuery] = useState("");
   const [recentSearches, setRecentSearches] =
@@ -203,6 +205,7 @@ export const Header = ({
               Current Location
             </span>
           </button>
+          <button>Toggle</button>
         </div>
       </div>
     </header>
